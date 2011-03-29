@@ -1,0 +1,45 @@
+<project name="FWPegasus" default="package" basedir=".">
+	<property environment="env" />
+	<loadproperties srcfile="build.properties"></loadproperties>	
+	<property name="dirOrigen" value="${workspace.home}" />
+	<property name="project.name" value="Veterinaria" />
+	<property name="pegasus.build.dir" value="${dirOrigen}/Pegasus/build/classes" />
+	<property name="jars.dir" value="${workspace.deploy}/jar" />
+	<property name="keystore" value="${dirOrigen}/${project.name}/myKeys" />
+
+	<!-- ================================================== -->
+	<!-- Package Pegasus FW                                 -->
+	<!-- ================================================== -->
+	<target name="package" description="Generacion del jar fwjava.jar">
+		<delete failonerror="false" file="${jars.dir}/pegasus.jar" />
+		<jar jarfile="${jars.dir}/pegasus.jar">
+			<fileset dir="${pegasus.build.dir}">
+				<include name="ar/**" />
+				<include name="pegasus.properties" />
+			</fileset>
+		</jar>
+	</target>
+
+	<!-- ================================================== -->
+	<!-- Sign Jars                                          -->
+	<!-- ================================================== -->
+	<target name="sign" description="Firma fwjava.jar ">
+		<signjar jar="${jars.dir}/fwjava.jar" keystore="${keystore}" alias="jdc" storepass="qwerty" />
+	</target>
+
+	<!-- ============================================ -->
+	<!-- Deploy Jars a Test                           -->
+	<!-- ============================================ -->
+	<target name="deploy-test" description="Copia el jar fwjava.jar al servidor de Test">
+		<echo message="Transfiriendo archivos a ${servidor.test} ${deploy.test.dir}"/>
+		<!-- Backup de los archivos -->
+		<sshexec host="${servidor.test}" username="desarrollo" password="Pr0gr4m$" command="cd ${deploy.test.dir}; ~/bin/bkp fwjava.jar" trust="yes" />
+		<!-- Copia de los archivos -->
+		<scp todir="desarrollo@${servidor.test}:${deploy.test.dir}" password="Pr0gr4m$" trust="yes">
+			<fileset dir="${jars.dir}">
+				<include name="fwjava.jar" />
+			</fileset>
+		</scp>
+	</target>
+
+</project>
