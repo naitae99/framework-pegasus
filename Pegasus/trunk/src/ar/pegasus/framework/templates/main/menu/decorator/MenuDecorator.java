@@ -5,7 +5,7 @@ import java.util.Map;
 import javax.swing.Icon;
 
 import ar.pegasus.framework.util.ImageUtil;
-import ar.pegasus.framework.util.RutaImagenes;
+import ar.pegasus.framework.util.RutaElementos;
 
 public class MenuDecorator {
 
@@ -21,7 +21,7 @@ public class MenuDecorator {
 
 	public Icon getIcono(String key) {
 		String iconPath = table.get(key);
-		return iconPath == null ? ImageUtil.loadIcon(RutaImagenes.BLANK_ICON) : ImageUtil.loadIcon(iconPath);
+		return iconPath == null ? ImageUtil.loadIcon(RutaElementos.BLANK_ICON) : ImageUtil.loadIcon(iconPath);
 	}
 
 }

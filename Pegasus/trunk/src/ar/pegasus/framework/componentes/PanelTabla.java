@@ -25,7 +25,7 @@ import javax.swing.event.ListSelectionListener;
 
 import ar.pegasus.framework.boss.BossEstilos;
 import ar.pegasus.framework.util.EtiquetasBotones;
-import ar.pegasus.framework.util.RutaImagenes;
+import ar.pegasus.framework.util.RutaElementos;
 
 public abstract class PanelTabla<T> extends JPanel {
 	private static final long serialVersionUID = 5910251916536265313L;
@@ -265,7 +265,7 @@ public abstract class PanelTabla<T> extends JPanel {
 	private JButton crearBotonModificar() {
 		if(btnModificar == null) {
 			if(debeMostrarBotonesConImagenes()){
-				btnModificar = BossEstilos.createButton(RutaImagenes.ICONO_BOTON_MODIFICAR, RutaImagenes.ICONO_BOTON_MODIFICAR_DESHABILITADO);
+				btnModificar = BossEstilos.createButton(RutaElementos.ICONO_BOTON_MODIFICAR, RutaElementos.ICONO_BOTON_MODIFICAR_DESHABILITADO);
 			}else{
 				btnModificar = BossEstilos.createButton(EtiquetasBotones.MODIFICAR);				
 			}

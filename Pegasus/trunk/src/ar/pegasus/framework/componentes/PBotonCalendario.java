@@ -11,7 +11,7 @@ import javax.swing.JButton;
 
 import ar.pegasus.framework.util.DecorateUtil;
 import ar.pegasus.framework.util.ImageUtil;
-import ar.pegasus.framework.util.RutaImagenes;
+import ar.pegasus.framework.util.RutaElementos;
 
 /**
  * Componente que muestra un botón que al ser presionado muestra un PPopupCalendar.
@@ -88,8 +88,8 @@ public class PBotonCalendario extends JButton {
 
 	//Construye gr�ficamente el componente
 	private void construct() {
-		String icono = (iconoCalendario == null ? RutaImagenes.DEFAULT_ICONO_CALENDARIO : iconoCalendario);
-		String iconoDeshab = (iconoCalendarioDeshab == null ? RutaImagenes.DEFAULT_ICONO_CALENDARIO_DESHAB : iconoCalendarioDeshab);
+		String icono = (iconoCalendario == null ? RutaElementos.DEFAULT_ICONO_CALENDARIO : iconoCalendario);
+		String iconoDeshab = (iconoCalendarioDeshab == null ? RutaElementos.DEFAULT_ICONO_CALENDARIO_DESHAB : iconoCalendarioDeshab);
 		DecorateUtil.decorateButton(this, icono, iconoDeshab);
 		setPreferredSize(new Dimension(DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT));
 		setToolTipText("Mostrar calendario");

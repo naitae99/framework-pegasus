@@ -50,7 +50,7 @@ public abstract class ExcelExporter<T> {
 	public abstract String getValorCelda(T elemento, int nroCelda);
 	
 	public void exportar(PJList lista) {
-		exportar(lista,RutaImagenes.DEFAULT_LOGO);
+		exportar(lista,RutaElementos.DEFAULT_LOGO);
 	}
 	
 	public void exportar(PJList lista, String rutaImagen){

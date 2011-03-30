@@ -34,7 +34,7 @@ import ar.pegasus.framework.util.DateUtil;
 import ar.pegasus.framework.util.DecorateUtil;
 import ar.pegasus.framework.util.GuiUtil;
 import ar.pegasus.framework.util.ImageUtil;
-import ar.pegasus.framework.util.RutaImagenes;
+import ar.pegasus.framework.util.RutaElementos;
 
 /**
  * Componente que muestra un calendario en pantalla. Extiende de JPanel.
@@ -600,7 +600,7 @@ public class PCalendar extends JPanel implements MouseListener, KeyListener, Foc
     private JButton getBtnBack() {
         if(btnBack == null) {
             btnBack = new JButton();
-            String icon = (backIcon == null ? RutaImagenes.DEFAULT_ICON_BTN_BACK : backIcon);
+            String icon = (backIcon == null ? RutaElementos.DEFAULT_ICON_BTN_BACK : backIcon);
             DecorateUtil.decorateButton(btnBack, icon);
             btnBack.setFocusable(false);
             btnBack.addActionListener(new BtnBackActionListener());
@@ -612,7 +612,7 @@ public class PCalendar extends JPanel implements MouseListener, KeyListener, Foc
     private JButton getBtnForward() {
         if(btnForward == null) {
             btnForward = new JButton();
-            String icon = (forwardIcon == null ? RutaImagenes.DEFAULT_ICON_BTN_FORWARD : forwardIcon);
+            String icon = (forwardIcon == null ? RutaElementos.DEFAULT_ICON_BTN_FORWARD : forwardIcon);
             DecorateUtil.decorateButton(btnForward, icon);
             btnForward.setFocusable(false);
             btnForward.addActionListener(new BtnForwardActionListener());

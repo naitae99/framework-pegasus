@@ -11,7 +11,7 @@ import javax.swing.event.ListSelectionListener;
 
 import ar.pegasus.framework.boss.BossEstilos;
 import ar.pegasus.framework.util.EtiquetasBotones;
-import ar.pegasus.framework.util.RutaImagenes;
+import ar.pegasus.framework.util.RutaElementos;
 
 /**
  * Componente que representa una versión reducida de PBotonesTabla.
@@ -80,8 +80,8 @@ public class PBotonesTablaLight extends JPanel {
 	public JButton getBotonAgregar() {
 		if(btnAgregar == null){
 			if(debeMostrarImagenes()){
-				String iconoAgregar = (iconoBtnAgregar == null ? RutaImagenes.DEFAULT_ICONO_BTN_AGREGAR : iconoBtnAgregar);
-				String iconoAgregarDeshab = (iconoBtnAgregarDeshab == null ? RutaImagenes.DEFAULT_ICONO_BTN_AGREGAR_DESHAB : iconoBtnAgregarDeshab);
+				String iconoAgregar = (iconoBtnAgregar == null ? RutaElementos.DEFAULT_ICONO_BTN_AGREGAR : iconoBtnAgregar);
+				String iconoAgregarDeshab = (iconoBtnAgregarDeshab == null ? RutaElementos.DEFAULT_ICONO_BTN_AGREGAR_DESHAB : iconoBtnAgregarDeshab);
 				btnAgregar = BossEstilos.createButton(iconoAgregar, iconoAgregarDeshab);
 			}else{
 				btnAgregar = BossEstilos.createButton(EtiquetasBotones.AGREGAR);
@@ -97,8 +97,8 @@ public class PBotonesTablaLight extends JPanel {
 	public JButton getBotonEliminar() {
 		if(btnEliminar == null){
 			if(debeMostrarImagenes()){
-				String iconoEliminar = (iconoBtnEliminar == null ? RutaImagenes.DEFAULT_ICONO_BTN_ELIMINAR : iconoBtnEliminar);
-				String iconoEliminarDeshab = (iconoBtnEliminarDeshab == null ? RutaImagenes.DEFAULT_ICONO_BTN_ELIMINAR_DESHAB : iconoBtnEliminarDeshab);
+				String iconoEliminar = (iconoBtnEliminar == null ? RutaElementos.DEFAULT_ICONO_BTN_ELIMINAR : iconoBtnEliminar);
+				String iconoEliminarDeshab = (iconoBtnEliminarDeshab == null ? RutaElementos.DEFAULT_ICONO_BTN_ELIMINAR_DESHAB : iconoBtnEliminarDeshab);
 				btnEliminar = BossEstilos.createButton(iconoEliminar, iconoEliminarDeshab);
 			}else{
 				btnEliminar = BossEstilos.createButton(EtiquetasBotones.ELIMINAR);

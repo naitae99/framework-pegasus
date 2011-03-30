@@ -17,7 +17,7 @@ import javax.swing.event.ListDataListener;
 
 import ar.pegasus.framework.util.DecorateUtil;
 import ar.pegasus.framework.util.ImageUtil;
-import ar.pegasus.framework.util.RutaImagenes;
+import ar.pegasus.framework.util.RutaElementos;
 /**
  * Componente que representa un conjunto de botones para Agregar, Eliminar y Agregar Todos,
  * relacionados con una tabla.
@@ -63,8 +63,8 @@ public class PBotonesTabla extends JPanel implements PBotonesTablaEventListener,
 		setLayout(new BorderLayout(0, DEFAULT_VERTICAL_GAP));
 		//Botón 'Agregar'
 		btnAgregar = new JButton();
-		String iconoAgregar = (iconoBtnAgregar == null ? RutaImagenes.DEFAULT_ICONO_BTN_AGREGAR : iconoBtnAgregar);
-		String iconoAgregarDeshab = (iconoBtnAgregarDeshab == null ? RutaImagenes.DEFAULT_ICONO_BTN_AGREGAR_DESHAB : iconoBtnAgregarDeshab);
+		String iconoAgregar = (iconoBtnAgregar == null ? RutaElementos.DEFAULT_ICONO_BTN_AGREGAR : iconoBtnAgregar);
+		String iconoAgregarDeshab = (iconoBtnAgregarDeshab == null ? RutaElementos.DEFAULT_ICONO_BTN_AGREGAR_DESHAB : iconoBtnAgregarDeshab);
 		DecorateUtil.decorateButton(btnAgregar, iconoAgregar, iconoAgregarDeshab);
 		btnAgregar.setPreferredSize(new Dimension(DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT));
 		btnAgregar.setToolTipText("Agregar");
@@ -76,8 +76,8 @@ public class PBotonesTabla extends JPanel implements PBotonesTablaEventListener,
 		});
 		//Botón 'Eliminar'
 		btnEliminar = new JButton();
-		String iconoEliminar = (iconoBtnEliminar == null ? RutaImagenes.DEFAULT_ICONO_BTN_ELIMINAR : iconoBtnEliminar);
-		String iconoEliminarDeshab = (iconoBtnEliminarDeshab == null ? RutaImagenes.DEFAULT_ICONO_BTN_ELIMINAR_DESHAB : iconoBtnEliminarDeshab);
+		String iconoEliminar = (iconoBtnEliminar == null ? RutaElementos.DEFAULT_ICONO_BTN_ELIMINAR : iconoBtnEliminar);
+		String iconoEliminarDeshab = (iconoBtnEliminarDeshab == null ? RutaElementos.DEFAULT_ICONO_BTN_ELIMINAR_DESHAB : iconoBtnEliminarDeshab);
 		DecorateUtil.decorateButton(btnEliminar, iconoEliminar, iconoEliminarDeshab);
 		btnEliminar.setPreferredSize(new Dimension(DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT));
 		btnEliminar.setToolTipText("Eliminar");
@@ -89,8 +89,8 @@ public class PBotonesTabla extends JPanel implements PBotonesTablaEventListener,
 		});
 		//Botón 'Agregar Todos'
 		btnAgregarTodos = new JButton();
-		String iconoAgregarTodos = (iconoBtnAgregarTodos == null ? RutaImagenes.DEFAULT_ICONO_BTN_AGREGAR_TODOS : iconoBtnAgregarTodos);
-		String iconoAgregarTodosDeshab = (iconoBtnAgregarTodosDeshab == null ? RutaImagenes.DEFAULT_ICONO_BTN_AGREGAR_TODOS_DESHAB : iconoBtnAgregarTodosDeshab);
+		String iconoAgregarTodos = (iconoBtnAgregarTodos == null ? RutaElementos.DEFAULT_ICONO_BTN_AGREGAR_TODOS : iconoBtnAgregarTodos);
+		String iconoAgregarTodosDeshab = (iconoBtnAgregarTodosDeshab == null ? RutaElementos.DEFAULT_ICONO_BTN_AGREGAR_TODOS_DESHAB : iconoBtnAgregarTodosDeshab);
 		DecorateUtil.decorateButton(btnAgregarTodos, iconoAgregarTodos, iconoAgregarTodosDeshab);
 		btnAgregarTodos.setPreferredSize(new Dimension(DEFAULT_BUTTON_WIDTH, DEFAULT_BUTTON_HEIGHT));
 		btnAgregarTodos.setToolTipText("Agregar Todos");

@@ -7,7 +7,7 @@ import javax.swing.JMenuItem;
 
 import ar.pegasus.framework.util.EtiquetasBotones;
 import ar.pegasus.framework.util.ImageUtil;
-import ar.pegasus.framework.util.RutaImagenes;
+import ar.pegasus.framework.util.RutaElementos;
 
 @SuppressWarnings("serial")
 public class MenuModulosPrincipal extends MenuModulosSimple {
@@ -48,8 +48,8 @@ public class MenuModulosPrincipal extends MenuModulosSimple {
 	}
 	
 	public void mostrarIconos() {
-		getMenuItemCambiarUsuario().setIcon(ImageUtil.loadIcon(RutaImagenes.ICONO_CAMBIAR_USUARIO));
-		getMenuItemSalir().setIcon(ImageUtil.loadIcon(RutaImagenes.ICONO_SALIR));
+		getMenuItemCambiarUsuario().setIcon(ImageUtil.loadIcon(RutaElementos.ICONO_CAMBIAR_USUARIO));
+		getMenuItemSalir().setIcon(ImageUtil.loadIcon(RutaElementos.ICONO_SALIR));
 	}
 	
 	public void agregarModulo(String nombre, Icon icono, ActionListener listener) {

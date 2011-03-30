@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 import ar.pegasus.framework.util.DateUtil;
 import ar.pegasus.framework.util.ImageUtil;
-import ar.pegasus.framework.util.RutaImagenes;
+import ar.pegasus.framework.util.RutaElementos;
 /**
  * Componente que muestra un botón que al ser presionado muestra un PPopupCalendar.
  * Además muestra dos botones para navegar por las fechas del calendario.
@@ -165,8 +165,8 @@ public class PBtnCalendarioBF extends JPanel {
             btnAtras.setFocusable(false);
             btnAtras.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             btnAtras.addActionListener(new BtnAtrasActionListener());
-            String iconoAtras = (iconoBtnAtras == null ? RutaImagenes.DEFAULT_ICONO_BTN_ATRAS : iconoBtnAtras);
-            String iconoAtrasDeshab = (iconoBtnAtrasDeshab == null ? RutaImagenes.DEFAULT_ICONO_BTN_ATRAS_DESHAB : iconoBtnAtrasDeshab);
+            String iconoAtras = (iconoBtnAtras == null ? RutaElementos.DEFAULT_ICONO_BTN_ATRAS : iconoBtnAtras);
+            String iconoAtrasDeshab = (iconoBtnAtrasDeshab == null ? RutaElementos.DEFAULT_ICONO_BTN_ATRAS_DESHAB : iconoBtnAtrasDeshab);
             Icon icon = ImageUtil.loadIcon(iconoAtras);
             btnAtras.setIcon(icon);
             btnAtras.setDisabledIcon(ImageUtil.loadIcon(iconoAtrasDeshab));
@@ -182,8 +182,8 @@ public class PBtnCalendarioBF extends JPanel {
             btnAdelante.setFocusable(false);
             btnAdelante.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             btnAdelante.addActionListener(new BtnAdelanteActionListener());
-            String iconoAdelante = (iconoBtnAdelante == null ? RutaImagenes.DEFAULT_ICONO_BTN_ADELANTE : iconoBtnAdelante);
-            String iconoAdelanteDeshab = (iconoBtnAdelanteDeshab == null ? RutaImagenes.DEFAULT_ICONO_BTN_ADELANTE_DESHAB : iconoBtnAdelanteDeshab);
+            String iconoAdelante = (iconoBtnAdelante == null ? RutaElementos.DEFAULT_ICONO_BTN_ADELANTE : iconoBtnAdelante);
+            String iconoAdelanteDeshab = (iconoBtnAdelanteDeshab == null ? RutaElementos.DEFAULT_ICONO_BTN_ADELANTE_DESHAB : iconoBtnAdelanteDeshab);
             Icon icon = ImageUtil.loadIcon(iconoAdelante);
             btnAdelante.setIcon(icon);
             btnAdelante.setDisabledIcon(ImageUtil.loadIcon(iconoAdelanteDeshab));

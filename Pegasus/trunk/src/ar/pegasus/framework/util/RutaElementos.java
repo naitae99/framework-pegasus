@@ -1,6 +1,6 @@
 package ar.pegasus.framework.util;
 
-public class RutaImagenes {
+public class RutaElementos {
 	public static final String DEFAULT_LOGO = "ar/pegasus/framework/imagenes/default_login.png";
 	public static final String ICONO_CAMBIAR_USUARIO = "ar/pegasus/framework/templates/main/menu/decorator/cambiar_usuario.png";
 	public static final String ICONO_SALIR = "ar/pegasus/framework/templates/main/menu/decorator/blank_icon.png";

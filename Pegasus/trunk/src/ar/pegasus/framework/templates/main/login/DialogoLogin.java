@@ -20,7 +20,7 @@ import ar.pegasus.framework.boss.BossEstilos;
 import ar.pegasus.framework.util.EtiquetasBotones;
 import ar.pegasus.framework.util.GuiUtil;
 import ar.pegasus.framework.util.ImageUtil;
-import ar.pegasus.framework.util.RutaImagenes;
+import ar.pegasus.framework.util.RutaElementos;
 
 
 public class DialogoLogin extends JDialog {
@@ -122,7 +122,7 @@ public class DialogoLogin extends JDialog {
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		setTitle(EtiquetasBotones.AUTENTICACION);
 		getContentPane().setLayout(new BorderLayout());
-		lblLogo = new JLabel(ImageUtil.loadIcon(RutaImagenes.DEFAULT_LOGO));
+		lblLogo = new JLabel(ImageUtil.loadIcon(RutaElementos.DEFAULT_LOGO));
 		getContentPane().add(lblLogo, BorderLayout.WEST);
 		JPanel panLogin = new JPanel(null);
 		getContentPane().add(panLogin, BorderLayout.CENTER);

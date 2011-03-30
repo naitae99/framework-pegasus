@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import ar.pegasus.framework.auditoria.BossError;
 import ar.pegasus.framework.util.FileUtil;
 import ar.pegasus.framework.util.ImageUtil;
-import ar.pegasus.framework.util.RutaImagenes;
+import ar.pegasus.framework.util.RutaElementos;
 
 
 public class PanelImagen extends JPanel {
@@ -52,7 +52,7 @@ public class PanelImagen extends JPanel {
 	
 	public void clear(){
 		try {
-			setImagen(escalarImagen(ImageUtil.readImg(FileUtil.getResource(RutaImagenes.RUTA_IMAGEN_NO_DISPONIBLE))));
+			setImagen(escalarImagen(ImageUtil.readImg(FileUtil.getResource(RutaElementos.RUTA_IMAGEN_NO_DISPONIBLE))));
 		} catch (IOException e) {
 			BossError.gestionarError(new PException(e.getMessage()));
 		}
