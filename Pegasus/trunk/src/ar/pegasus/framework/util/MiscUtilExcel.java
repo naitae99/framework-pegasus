@@ -25,10 +25,11 @@ import org.apache.poi.hssf.usermodel.contrib.HSSFRegionUtil;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.hssf.util.Region;
 
+import ar.pegasus.framework.boss.AppConstantesBase;
+import ar.pegasus.framework.componentes.IndicadorProgreso;
 import ar.pegasus.framework.componentes.PFileSelector;
 import ar.pegasus.framework.componentes.PJTable;
 import ar.pegasus.framework.componentes.PJTable.DateColumn;
-import ar.pegasus.framework.componentes.IndicadorProgreso;
 
 public class MiscUtilExcel {
 
@@ -43,7 +44,6 @@ public class MiscUtilExcel {
 
 	private List<HSSFCellStyle> estilos;
 	private static final int LONG_MAX_NOMBRE_HOJA = 31;
-	private static final String NOMBRE_HOJA_DEFAULT = "Hoja 1";
 	private static final String TEXTO_TRUNCADO = "...";
 
 	/**
@@ -127,7 +127,7 @@ public class MiscUtilExcel {
 			if(tabla != null) {
 				String nombreHoja = nombresHojas != null ? nombresHojas.get(i) : null;
 				if(nombreHoja == null || nombreHoja.trim().length() == 0) {
-					nombreHoja = NOMBRE_HOJA_DEFAULT + i;
+					nombreHoja = AppConstantesBase.NOMBRE_HOJA_DEFAULT + i;
 				}
 				if(nombreHoja.trim().length() > LONG_MAX_NOMBRE_HOJA) {
 					nombreHoja = nombreHoja.trim().substring(0, LONG_MAX_NOMBRE_HOJA - TEXTO_TRUNCADO.length() - 1).concat(TEXTO_TRUNCADO);
@@ -138,17 +138,13 @@ public class MiscUtilExcel {
 		guardarLibro(libro, ruta);
 	}
 
-	private void generarHoja(HSSFWorkbook libro, String nombreHoja, PJTable tabla, String titulo, String subtitulo, IndicadorProgreso indicador,
-			boolean intercalar) {
+	private void generarHoja(HSSFWorkbook libro, String nombreHoja, PJTable tabla, String titulo, String subtitulo, IndicadorProgreso indicador, boolean intercalar) {
 		generarHoja(nombreHoja, libro, tabla, titulo, subtitulo, null, indicador, intercalar);
 	}
 
-	private void generarHoja(HSSFWorkbook libro, PJTable tabla, String titulo, String subtitulo, String filtros, IndicadorProgreso indicador,
-			boolean intercalar) {
-		generarHoja(NOMBRE_HOJA_DEFAULT, libro, tabla, titulo, subtitulo, filtros, indicador, intercalar);
+	private void generarHoja(HSSFWorkbook libro, PJTable tabla, String titulo, String subtitulo, String filtros, IndicadorProgreso indicador, boolean intercalar) {
+		generarHoja(AppConstantesBase.NOMBRE_HOJA_DEFAULT, libro, tabla, titulo, subtitulo, filtros, indicador, intercalar);
 	}
-
-	private static final String EXTENSION_EXCEL = ".xls";
 
 	public static void setearSugerenciaNombreArchivoExcel(String nombre) {
 		File directorioCorriente = PFileSelector.getLastSelectedFile();
@@ -161,7 +157,7 @@ public class MiscUtilExcel {
 			} catch(IOException e1) {
 				e1.printStackTrace();
 			}
-			File archivoSugerido = new File(nombreSugerido.concat(EXTENSION_EXCEL));
+			File archivoSugerido = new File(nombreSugerido.concat(AppConstantesBase.EXTENSION_EXCEL));
 			PFileSelector.setLastSelectedFile(archivoSugerido);
 		}
 	}
@@ -169,7 +165,7 @@ public class MiscUtilExcel {
 	private void generarHoja(String nombreHoja, HSSFWorkbook libro, PJTable tabla, String titulo, String subtitulo, String filtros,
 			IndicadorProgreso indicador, boolean intercalar) {
 		if(nombreHoja == null) {
-			nombreHoja = NOMBRE_HOJA_DEFAULT;
+			nombreHoja = AppConstantesBase.NOMBRE_HOJA_DEFAULT;
 		}
 		ArrayList<FuenteCelda> fuentesCeldas = new ArrayList<FuenteCelda>();
 		int cantColumnasReal = 0;
@@ -330,6 +326,7 @@ public class MiscUtilExcel {
 		delimitarAgruparEncabezados(libro, hoja, colFin);
 		//
 		//
+		@SuppressWarnings("unchecked")
 		List<PJTable.GrupoCeldas> gruposCeldas = tabla.getGruposCeldas();
 		for(Iterator<PJTable.GrupoCeldas> i = gruposCeldas.iterator(); i.hasNext();) {
 			PJTable.GrupoCeldas grupoCeldas = i.next();
@@ -417,7 +414,7 @@ public class MiscUtilExcel {
 	}
 
 	/**
-	 * Retorna la constante que representa la alineación de una celda.
+	 * Retorna la constante que representa la alineaciï¿½n de una celda.
 	 * 
 	 * @param tabla
 	 * @param fila
@@ -514,9 +511,9 @@ public class MiscUtilExcel {
 
 	/**
 	 * Recorre las instancias ya creadas de FuenteCelda y las compara con los
-	 * atributos de la tipografía recibidos como parámetro. Si existe alguna que
+	 * atributos de la tipografï¿½a recibidos como parï¿½metro. Si existe alguna que
 	 * coincide, retorna la instancia de HSSFFont que esta contiene. Caso
-	 * contrario, agrega una nueva instancia de FuenteCelda a la colección.
+	 * contrario, agrega una nueva instancia de FuenteCelda a la colecciï¿½n.
 	 * 
 	 * @param libro
 	 * @param fuentesCeldas
@@ -524,7 +521,7 @@ public class MiscUtilExcel {
 	 * @param negrita
 	 * @param cursiva
 	 * @return La instancia de la clase HSSFFont correspondiente a los atributos
-	 *         de la tipografía recibidos como parámetro.
+	 *         de la tipografï¿½a recibidos como parï¿½metro.
 	 */
 	private HSSFFont getHSSFFont(HSSFWorkbook libro, ArrayList<FuenteCelda> fuentesCeldas, String nombre, boolean negrita, boolean cursiva) {
 		for(FuenteCelda fuenteCelda : fuentesCeldas) {
@@ -538,7 +535,7 @@ public class MiscUtilExcel {
 	}
 
 	/**
-	 * Clase que mantiene la relación entre los atributos de una tipografía y
+	 * Clase que mantiene la relaciï¿½n entre los atributos de una tipografï¿½a y
 	 * una objeto HSSFFont.
 	 */
 	static class FuenteCelda {

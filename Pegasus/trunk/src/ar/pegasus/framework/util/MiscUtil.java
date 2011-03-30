@@ -45,9 +45,9 @@ public class MiscUtil {
 	}
 
 	/**
-	 * Devuelve la <b>versión</b> del JDK instalado.
+	 * Devuelve la <b>versiÃ³n</b> del JDK instalado.
 	 * 
-	 * @return La versión del JDK instalado.
+	 * @return La versiÃ³n del JDK instalado.
 	 */
 	public static String getJDKVersion() {
 		return System.getProperty("java.version");
@@ -81,18 +81,18 @@ public class MiscUtil {
 	}
 
 	/**
-	 * Devuelve la <b>descripción</b> del Sist. Operativo.
+	 * Devuelve la <b>descripciÃ³n</b> del Sist. Operativo.
 	 * 
-	 * @return La descripción del SO.
+	 * @return La descripciÃ³n del SO.
 	 */
 	public static String getOSName() {
 		return System.getProperty("os.name");
 	}
 
 	/**
-	 * Devuelve la <b>versión</b> del Sist. Operativo.
+	 * Devuelve la <b>versiÃ³n</b> del Sist. Operativo.
 	 * 
-	 * @return La versión del SO.
+	 * @return La versiÃ³n del SO.
 	 */
 	public static String getOSVersion() {
 		return System.getProperty("os.version");
@@ -103,7 +103,7 @@ public class MiscUtil {
 	 *            la clase.
 	 * @return el path donde se encuentra la clase.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static String getClassPath(Class theClass) {
 		return theClass.getPackage().getName().replace('.', '/');
 	}
@@ -133,8 +133,7 @@ public class MiscUtil {
 	 *		boolean intercalar)
 	 * 
 	 */
-	public static void exportarAExcel(PJTable tabla, String titulo, String subtitulo, String filtros, String ruta, IndicadorProgreso indicador,
-			boolean intercalar) {
+	public static void exportarAExcel(PJTable tabla, String titulo, String subtitulo, String filtros, String ruta, IndicadorProgreso indicador, boolean intercalar) {
 		MiscUtilExcel.getInstance().exportarAExcel(tabla, titulo, subtitulo, filtros, ruta, indicador, intercalar);
 	}
 
@@ -169,19 +168,19 @@ public class MiscUtil {
 
 
 	/**
-	 * Crea una tipografìa a partir de un archivo.
+	 * Crea una tipografï¿½a a partir de un archivo.
 	 * 
 	 * @param fontFile
-	 *            El archivo de la tipografìa.
+	 *            El archivo de la tipografï¿½a.
 	 * @param fontFormat
-	 *            El formato de tipografìa. Puede ser MiscUtil.TRUETYPE_FONT o
+	 *            El formato de tipografï¿½a. Puede ser MiscUtil.TRUETYPE_FONT o
 	 *            MiscUtil.TYPE1_FONT.
 	 * @param fontStyle
-	 *            El estilo de la tipografìa. Puede ser
+	 *            El estilo de la tipografï¿½a. Puede ser
 	 *            MiscUtil.PLAIN_FONT_STYLE o MiscUtil.BOLD_FONT_STYLE o
 	 *            MiscUtil.ITALIC_FONT_STYLE.
 	 * @param fontSize
-	 *            El tamaño de la tipografìa.
+	 *            El tamaï¿½o de la tipografï¿½a.
 	 * @return La fuente creada a partir del archivo.
 	 * @throws IOException
 	 * @throws FontFormatException
@@ -274,7 +273,7 @@ public class MiscUtil {
 
 	/**
 	 * @param throwable
-	 * @return el String correspondiente al stack trace de la excepción pasada como parámetro.
+	 * @return el String correspondiente al stack trace de la excepciï¿½n pasada como parï¿½metro.
 	 */
 	public static String getTextoExcepcion (Throwable throwable) {
 		if (throwable == null)
@@ -285,16 +284,16 @@ public class MiscUtil {
 	}
 
 	/**
-	 * Reemplaza acentos, ñ's, espacios y pasa a mayúsculas.
-	 * Ej) La Nación -> LA_NACION
+	 * Reemplaza acentos, ï¿½'s, espacios y pasa a mayï¿½sculas.
+	 * Ej) La Naciï¿½n -> LA_NACION
 	 * @param string
-	 * @return el string pasado como parámetro transformado.
+	 * @return el string pasado como parï¿½metro transformado.
 	 */
 	public static String getNombreCarpeta(String string) {
 		string = StringUtil.trim(string) ;
 		string = StringUtil.reemplazarAcentos(string) ;
-		string = string.replaceAll("ñ", "n");
-		string = string.replaceAll("Ñ", "N");
+		string = string.replaceAll("ï¿½", "n");
+		string = string.replaceAll("ï¿½", "N");
 		string = string.replaceAll(StringUtil.ESPACIO_BLANCO, "_");
 		return string.toUpperCase() ;
 	}

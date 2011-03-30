@@ -28,7 +28,6 @@ public class EtiquetasBotones {
 	public static final String IMPRIMIR_LISTA = "Imprimir Lista";
 	public static final String IMPRIMIR_FICHA = "Imprimir Ficha";
 	public static final String EXCEL = "Excel";
-	public static final String NOMBRE_HOJA_DEFAULT = "Hoja 1";
 	public static final String GRABAR = "Grabar";
 	public static final String DETALLES = "Detalles";
 	public static final String EXTENSION_EXCEL = ".xls";

@@ -22,6 +22,7 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.hssf.util.Region;
 
 import ar.pegasus.framework.auditoria.BossError;
+import ar.pegasus.framework.boss.AppConstantesBase;
 import ar.pegasus.framework.componentes.IndicadorProgreso;
 import ar.pegasus.framework.componentes.PException;
 import ar.pegasus.framework.componentes.PFileSelector;
@@ -89,7 +90,7 @@ public abstract class ExcelExporter<T> {
 		int cantFilas = lista.getItemCount();
 		HSSFCell celda;
 		HSSFRow fila;
-		HSSFSheet hoja = libro.createSheet(EtiquetasBotones.NOMBRE_HOJA_DEFAULT);
+		HSSFSheet hoja = libro.createSheet(AppConstantesBase.NOMBRE_HOJA_DEFAULT);
 		hoja.setMargin(HSSFSheet.LeftMargin, 0.5d);
 		hoja.setMargin(HSSFSheet.TopMargin, 0.5d);
 		hoja.setMargin(HSSFSheet.RightMargin, 0.5d);

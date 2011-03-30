@@ -5,7 +5,9 @@ public class AppConstantesBase {
 	public static final String APP_NAME = "applicationName";
 	public static final String INITIAL_DIR = "iniciarEn";
 
+	/* Constantes de exportacion a excel */
 	public static final String EXTENSION_EXCEL = ".xls";
+	public static final String NOMBRE_HOJA_DEFAULT = "Hoja 1";
 	
 	/* Valores standar para las ventanas MDI */
 	public static int ANCHO_MDI_DEFAULT = 1120;	

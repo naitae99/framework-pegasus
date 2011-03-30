@@ -31,12 +31,12 @@ public abstract class BossAccionesGeneral {
 
 	/**
 	 * Ejecuta acciones generales, devuelve <b>true</b> si hay
-	 * que refrescar despu�s de ejecutar la acci�n. 
-	 * @param accion, identificador de la acci�n��n a ejecutar
-	 * @param tabla, necesaria para las acciones de impresi�n y selecci�n 
+	 * que refrescar después de ejecutar la acción. 
+	 * @param accion, identificador de la acción a ejecutar
+	 * @param tabla, necesaria para las acciones de impresión y selección 
 	 * @param titulo, necesario para el titulo de los reportes
 	 * @param subtitulo, Idem Anterior
-	 * @return rv, un booleando indicando si debe refrescar los datos al terminar la acci�n
+	 * @return rv, un booleando indicando si debe refrescar los datos al terminar la acción
 	 */
 	public static boolean procesarAccionGeneral(int accion, PJTable tabla, String titulo, String subtitulo, String filtros) {
 		boolean rv = false;
@@ -55,78 +55,7 @@ public abstract class BossAccionesGeneral {
 	}
 
 	/**
-	 * Ejecuta la acci�n para la lista de reservas, devuelve <b>true</b> si hay
-	 * que refrescar despu�s de ejecutar la acci�n.
-	 * @param accion, identificador de acci�n a ejecutar
-	 * @param idModulo, no usado
-	 * @param ordenes, Lista de elementos sobre los cuales se ejecuta la acci�n 
-	 * @return Un valor booleando indicando si debe refrescar los datos al terminar la acci�n
-	 */
-//	public boolean procesarAccion(int accion, int idModulo, List<? extends OrdenBasica> ordenes) {
-//		switch(accion) {
-////			case EnumAcciones.ESTADO_ACTUAL:
-////			mostrarEstadoActual(ordenes.get(0));
-////			break;
-//			case EnumAcciones.SALDO_ACTUAL:
-////			mostrarEstadoActualSaldo(ordenes.get(0));
-//			break;
-////			case EnumAcciones.VER_AVISO:
-////			verAviso(ordenes);
-////			break;
-//		}
-//		return false;
-//	}
-
-	/**
-	 * Muestra el estado actual de una Orden de acuerdo a la informaci�n
-	 * de SAP.
-	 * @param orden
-	 */
-//	public boolean mostrarEstadoActual(OrdenBasica orden) {
-//		if(orden.getTipoPublicidad() == EnumTipoPublicidad.PUBLICIDAD) { //TODO: sacar este if para clasificados
-//			AgenciaSAP estadoAgencia;
-//			try {
-//				// estadoAgencia = BossPublicidadCredito.traerAgenciaConInfoRetencion(orden.getIdPublicidad());
-//				estadoAgencia = BeanFactoryFWSGPRemote.getInstance().getBean(AgenciaSapFacadeRemote.class).traerAgenciaConInfoRetencion(orden.getIdPublicidad());
-//				String estado = "";
-//				if(estadoAgencia.isInhabilitado()) {
-//					estado = "Inhabilitado";
-//				} else {
-//					estado = "Habilitado";
-//				}
-//				CLJOptionPane.showInformationMessage(AbstractMainTemplate.getFrameInstance() , "El estado actual de la agencia es: " + estado, "Estado actual");
-//				return true;
-//			} catch(PException e) {
-//				BossError.gestionarError("No se puede obtener el estado de la agencia.", e);
-//			}
-//		}
-//		return false;
-//	}
-
-	/**
-	 * Muestra el saldo de la agencia.
-	 * @param orden la orden con la agencia de la que se quiere mostrar el saldo.
-	 */
-//	public void mostrarEstadoActualSaldo(OrdenBasica orden) {
-//		if(orden.getTipoPublicidad() == EnumTipoPublicidad.PUBLICIDAD) { //TODO: sacar este if para clasificados
-//			try {
-//				// SaldoSAP saldoAgencia = BossPublicidadCredito.traerAgenciaConSaldoDeCredito(orden.getIdPublicidad());
-//				SaldoSAP saldoAgencia = BeanFactoryFWSGPRemote.getInstance().getBean(SaldoAgenciaSapFacadeRemote.class).traerAgenciaConSaldoDeCredito(orden.getIdPublicidad());
-//				JDialog dialog = new SaldoSAPDialog(orden, saldoAgencia);
-//				dialog.setVisible(true);
-//			} catch(PException e) {
-//				BossError.gestionarError("No se puede obtener el saldo", e);
-//			}
-//		}
-//	}
-
-
-	/** Devuelve una lista de acciones posible segun una orden basica 
-	 * @throws PException */
-//	protected abstract List<?> getAcciones(OrdenBasica orden) throws PException;
-
-	/**
-	 * Acci�n que exporta una CLJTable a un archivo Excel.
+	 * Acción que exporta una PJTable a un archivo Excel.
 	 * @param tabla La tabla a exportar.
 	 * @param titulo El nombre sugerido para el archivo.
 	 * @param subtitulo El nombre de la hoja. Si su longitud es mayor a 31
@@ -185,7 +114,7 @@ public abstract class BossAccionesGeneral {
 	}
 
 	/**
-	 * Acci�n que selecciona toda las filas de una tabla.
+	 * Acción que selecciona toda las filas de una tabla.
 	 * @param tabla
 	 */
 	private static void seleccionarTodo(PJTable tabla) {
@@ -211,31 +140,22 @@ public abstract class BossAccionesGeneral {
 	/** Configura las acciones 
 	 * @throws PException */
 	public static void configurarAcciones() throws PException {
-//		Hashtable<Integer,Integer> accionesPorMedio = new Hashtable<Integer, Integer>();
 		Usuario usuario = BossUsuarioVerificado.getUsuarioVerificado();
 		if(usuario != null) {
 			Rol rol = usuario.getRol();
 			if(rol != null) {				
-//				List<MedioConsulta> medios ;
-//				BossMedioProductoConsultaRemote bossMedioProductoConsulta = BeanFactoryFWSGPRemote.getInstance().getBean(BossMedioProductoConsultaRemote.class);
-//				medios = bossMedioProductoConsulta.getMedioConsultaList() ;
-//				int tipoAccion = EnumTipoAccion.OPERACION;
-//				for(MedioConsulta medio : medios) {
-//					accionesPorMedio.put(medio.getIdPublicidad(), tipoAccion);
-//				}
-//				EnumAcciones.setTipoAccionesPorMedio(accionesPorMedio);
 			}
 		}
 	}
 
 	/**
 	 * Presenta un dialogo avisando que la accion no es editable y pide
-	 * confirmaci�n del usuario.
-	 * @return true si el usuario confirma la acci�n.
+	 * confirmación del usuario.
+	 * @return true si el usuario confirma la acción.
 	 */
 	protected static boolean confirmarAccion() {
-		if(PJOptionPane.showQuestionMessage(null, "El aviso ya ha sido tomado por diagramaci�n.\nDesea realizar la acci�n de todos modos?",
-				"Confirmaci�n de modificaci�n") == PJOptionPane.YES_OPTION) {
+		if(PJOptionPane.showQuestionMessage(null, "El aviso ya ha sido tomado por diagramación.\nDesea realizar la acción de todos modos?",
+				"Confirmación de modificación") == PJOptionPane.YES_OPTION) {
 			return true;
 		} else {
 			return false;
