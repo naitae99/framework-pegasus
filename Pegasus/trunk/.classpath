@@ -30,13 +30,12 @@
 	<classpathentry exported="true" kind="lib" path="lib/jhall.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jconfig.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/log4j.jar"/>
-	<!-- classpathentry exported="true" kind="lib" path="lib/jasperreports-1.2.5.jar"/ -->
 	<classpathentry exported="true" kind="lib" path="lib/jasperreports-4.0.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/groovy-all-1.7.5.jar"/>
-	<classpathentry kind="lib" path="lib/JEE/seam2.2.0.GA/jboss-el.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/JEE/seam2.2.0.GA/jboss-el.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jboss-j2ee.jar"/>
-	<classpathentry kind="lib" path="lib/JEE/seam2.2.0.GA/jboss-seam-debug.jar"/>
-	<classpathentry kind="lib" path="lib/JEE/seam2.2.0.GA/jboss-seam-ui.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/JEE/seam2.2.0.GA/jboss-seam-debug.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/JEE/seam2.2.0.GA/jboss-seam-ui.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/commons-discovery-0.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/c3p0-0.9.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jboss-ejb3x.jar"/>
@@ -52,6 +51,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/JEE/commons-fileupload.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/JEE/cos.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/JEE/el-ri.jar"/>
-	<classpathentry kind="lib" path="lib/JEE/seam2.2.0.GA/jboss-seam.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/JEE/seam2.2.0.GA/jboss-seam.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
