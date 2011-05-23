@@ -2,8 +2,8 @@ package ar.pegasus.framework.util;
 
 /**
  * Truco del Ancla.
- * Clase útil para la carga de recursos (archivos) a través de Java Web Start.
- * Ej.: Carga de una imágen
+ * Clase Ãºtil para la carga de recursos (archivos) a travÃ©s de Java Web Start.
+ * Ej.: Carga de una imÃ¡gen
  * 
  * ClassLoader cl = new AnchorTrick().getClass().getClassLoader();
  * ImageIcon imagen;

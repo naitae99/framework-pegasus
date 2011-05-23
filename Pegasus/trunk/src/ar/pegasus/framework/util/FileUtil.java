@@ -20,8 +20,8 @@ import org.apache.commons.io.FileSystemUtils;
 import ar.pegasus.framework.componentes.PException;
 
 /**
- * Clase con funciones útiles relacionadas con archivos y carpetas.
- * @author AGEA S.A.
+ * Clase con funciones Ãºtiles relacionadas con archivos y carpetas.
+ * @author oarias
  */
 public class FileUtil {
 
@@ -29,7 +29,7 @@ public class FileUtil {
 
     /**
      * Devuelve la URL del recurso situado en la ruta especificada.
-     * @param path La ruta donde está situado el recurso.
+     * @param path La ruta donde estÃ¡ situado el recurso.
      * @return
      */
 	public static URL getResource(String path) {
@@ -40,29 +40,27 @@ public class FileUtil {
     /**
      * Devuelve la URL del recurso situado en la ruta especificada.
      * @param c
-     * @param path La ruta donde está situado el recurso.
+     * @param path La ruta donde estÃ¡ situado el recurso.
      * @return
      */
-    @SuppressWarnings("unchecked")
-	public static URL getResource(Class c, String path) {
+	public static URL getResource(@SuppressWarnings("rawtypes") Class c, String path) {
         return c.getClassLoader().getResource(path);
     }
 
     /**
      * Devuelve el recurso situado en la ruta especificada como un java.util.File.
      * @param c
-     * @param path La ruta donde está situado el recurso.
+     * @param path La ruta donde estÃ¡ situado el recurso.
      * @return
      * @throws URISyntaxException
      */
-    @SuppressWarnings("unchecked")
-	public static File getResourceFile(Class c, String path) throws URISyntaxException {
+	public static File getResourceFile(@SuppressWarnings("rawtypes") Class c, String path) throws URISyntaxException {
     	return new File(getResource(c, path).toURI());
     }
 
     /**
      * Devuelve el recurso situado en la ruta especificada como stream.
-     * @param path La ruta donde está situado el recurso.
+     * @param path La ruta donde estÃ¡ situado el recurso.
      * @return
      */
     public static InputStream getResourceAsStream(String path) {
@@ -89,7 +87,7 @@ public class FileUtil {
     }
 
     /**
-     * Valida que el path contenga como separador sólo '/' o '\' pero no ambos a la vez.
+     * Valida que el path contenga como separador sï¿½lo '/' o '\' pero no ambos a la vez.
      * @param path El path a validar.
      * @return True o false.
      */
@@ -131,7 +129,6 @@ public class FileUtil {
         return out.toString();
     }
 
-    @SuppressWarnings("unchecked")
 	private static String[] split(String source, String separator) {
         String[] ret = null;
         int i = source.indexOf(separator);
@@ -153,7 +150,7 @@ public class FileUtil {
             }
             ret = new String[aux.size()];
             int k = 0;
-            for(Iterator iter = aux.iterator(); iter.hasNext();) {
+            for(@SuppressWarnings("rawtypes")Iterator iter = aux.iterator(); iter.hasNext();) {
                 ret[k++] = (String)iter.next();
             }
             return ret;
@@ -164,7 +161,7 @@ public class FileUtil {
      * Copia un directorio completo (con todas los archivos y subcarpetas que contiene)
      * a otro directorio.
      * @param origen El directorio a copiar.
-     * @param destino El directorio donde se copiará el directorio de origen.
+     * @param destino El directorio donde se copiarï¿½ el directorio de origen.
      * @throws IOException
      */
 	public static void copiarDirectorio(File origen, File destino) throws IOException {
@@ -261,7 +258,7 @@ public class FileUtil {
     }
 
     /**
-     * Devuelve la extensión del archivo especificado.
+     * Devuelve la extensiï¿½n del archivo especificado.
      * Por ej. para el archivo con nombre <b>ArchivoComprimido.zip</b>
      * devuelve <b>zip</b>.
      * @param archivo
@@ -272,7 +269,7 @@ public class FileUtil {
     }
 
     /**
-     * Devuelve la extensión del archivo especificado.
+     * Devuelve la extensiï¿½n del archivo especificado.
      * Por ej. para el archivo con nombre <b>ArchivoComprimido.zip</b>
      * devuelve <b>zip</b>.
      * @param nombreArchivo
@@ -284,7 +281,7 @@ public class FileUtil {
     }
 
     /**
-     * Devuelve el nombre del archivo sin la extensión.
+     * Devuelve el nombre del archivo sin la extensiï¿½n.
      * Por ej. para el archivo con nombre <b>ArchivoComprimido.zip</b>
      * devuelve <b>ArchivoComprimido</b>.
      * @param archivo
@@ -295,7 +292,7 @@ public class FileUtil {
     }
 
     /**
-     * Devuelve el nombre del archivo sin la extensión.
+     * Devuelve el nombre del archivo sin la extensiï¿½n.
      * Por ej. para el archivo con nombre <b>ArchivoComprimido.zip</b>
      * devuelve <b>ArchivoComprimido</b>.
      * @param nombreArchivo
@@ -380,7 +377,7 @@ public class FileUtil {
     }
 
     /**
-     * Devuelve <b>true</b> si el tamaño del archivo especificado es
+     * Devuelve <b>true</b> si el tamaï¿½o del archivo especificado es
      * menor que el espacio total en el disco.
      * @param archivo
      * @return
@@ -391,9 +388,9 @@ public class FileUtil {
     }
 
     /**
-     * Devuelve <b>true</b> si el tamaño del archivo especificado es
+     * Devuelve <b>true</b> si el tamaï¿½o del archivo especificado es
      * menor que el espacio total en el disco.
-     * @param tamanioArchivo El tamaño del archivo en bytes.
+     * @param tamanioArchivo El tamaï¿½o del archivo en bytes.
      * @return
      * @throws IOException
      */
@@ -425,7 +422,7 @@ public class FileUtil {
     }
 
     /**
-     * Devuelve <b>true</b> si el archivo pasado por parámetro ya se encuentra abierto.
+     * Devuelve <b>true</b> si el archivo pasado por parï¿½metro ya se encuentra abierto.
      * @param file El archivo a verficar.
      * @return
      */
@@ -448,7 +445,7 @@ public class FileUtil {
     }
 
     /**
-     * También en BossIO
+     * Tambiï¿½n en BossIO
      * Returns the contents of the file in a byte array
      * 
      */

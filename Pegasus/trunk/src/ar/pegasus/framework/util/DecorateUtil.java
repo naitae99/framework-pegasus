@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 /**
- * @author AGEA S.A.
+ * @author oarias
  */
 public class DecorateUtil {
 

@@ -38,7 +38,7 @@ public class ImageUtil {
 
     /**
      * Crea un objeto <b>javax.swing.ImageIcon</b>.
-     * @param path El path de la im�gen.
+     * @param path El path de la imágen.
      * @return Un objeto javax.swing.ImageIcon.
      * @see javax.swing.ImageIcon
      */

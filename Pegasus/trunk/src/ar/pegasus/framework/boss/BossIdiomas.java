@@ -38,11 +38,9 @@ public class BossIdiomas {
 	public String formatDate(java.util.Date fecha) {
 		if(dateFormatter == null) {
 			if(isSpanish())
-				//dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
-				dateFormatter = DateUtil.getSimpleDateFormat("dd/MM/yyyy");
+				dateFormatter = DateUtil.getSimpleDateFormat(DateUtil.SHORT_DATE);
 			else
-				//dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
-				dateFormatter = DateUtil.getSimpleDateFormat("MM/dd/yyyy");
+				dateFormatter = DateUtil.getSimpleDateFormat(DateUtil.SHORT_DATE_ENGLISH);
 		}
 		return dateFormatter.format(fecha);
 	}
@@ -54,7 +52,7 @@ public class BossIdiomas {
 	private Locale getLocale() {
 		if(locale == null) {
 //			locale = new Locale("es", "","");//esto no funciona
-			locale = new Locale("", "", "");//Ojo!! Si quiero el lenguaje default (español,backdt.properties) tengo que usar esto. 
+			locale = new Locale("", "", "");//Ojo!! Si quiero el lenguaje default (espaÃ±ol,backdt.properties) tengo que usar esto. 
 //			locale = new Locale("en", "US");
 		}
 		return locale;
@@ -67,34 +65,34 @@ public class BossIdiomas {
 		return messageBundle;
 	}
 
-	/**
-	 * @deprecated
-	 * Recarga TODOS los archivos *.properties. 
-	 * Solo debe usarse durante desarrollo, para ver que los cambios tomaron efecto
-	 * NO debe usarse en ninguna otra circunstancia. 
-	 */
-	public void reload() {
-		try {
-			Class klass = ResourceBundle.getBundle(this.resourceBundle).getClass().getSuperclass();
-			java.lang.reflect.Field field = klass.getDeclaredField("cacheList");
-			field.setAccessible(true);
-			sun.misc.SoftCache cache = (sun.misc.SoftCache)field.get(null);
-			cache.clear();
-		} catch(SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch(IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch(NoSuchFieldException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch(IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		messageBundle = ResourceBundle.getBundle(resourceBundle, getLocale());
-	}
+//	/**
+//	 * @deprecated
+//	 * Recarga TODOS los archivos *.properties. 
+//	 * Solo debe usarse durante desarrollo, para ver que los cambios tomaron efecto
+//	 * NO debe usarse en ninguna otra circunstancia. 
+//	 */
+//	public void reload() {
+//		try {
+//			Class klass = ResourceBundle.getBundle(this.resourceBundle).getClass().getSuperclass();
+//			java.lang.reflect.Field field = klass.getDeclaredField("cacheList");
+//			field.setAccessible(true);
+//			sun.misc.SoftCache cache = (sun.misc.SoftCache)field.get(null);
+//			cache.clear();
+//		} catch(SecurityException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch(IllegalArgumentException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch(NoSuchFieldException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch(IllegalAccessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		messageBundle = ResourceBundle.getBundle(resourceBundle, getLocale());
+//	}
 
 	public String getString(String key) {
 		return getMessageBundle().getString(key);

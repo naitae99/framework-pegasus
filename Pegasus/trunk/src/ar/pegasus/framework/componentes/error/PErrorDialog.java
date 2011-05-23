@@ -25,14 +25,15 @@ import ar.pegasus.framework.componentes.PJTextArea;
 import ar.pegasus.framework.util.DecorateUtil;
 import ar.pegasus.framework.util.GuiUtil;
 import ar.pegasus.framework.util.ImageUtil;
+import ar.pegasus.framework.util.RutaElementos;
 
 
 
 /**
- * Componente que muestra un cuadro de di�logo con un mensaje de error y tres botones:
- * el primero para ver los detalles del error (el stack trace de la excepci�n),
+ * Componente que muestra un cuadro de diálogo con un mensaje de error y tres botones:
+ * el primero para ver los detalles del error (el stack trace de la excepción),
  * el segundo para ver los tips o sugerencias en cuanto al error, y el tercero para
- * cerrar el cuadro de di�logo.
+ * cerrar el cuadro de diálogo.
  * @author oarias
  */
 public class PErrorDialog extends JDialog {
@@ -60,11 +61,11 @@ public class PErrorDialog extends JDialog {
 	private JPanel panDetalle = null;
 	private JPanel panTips = null;
 	//Iconos
-	private Icon iconoErr = ImageUtil.loadIcon("ar/pegasus/framework/imagenes/error.gif");
+	private Icon iconoErr = ImageUtil.loadIcon(RutaElementos.ERROR_IMG);
 	private JLabel lblIconoError = new JLabel(iconoErr, JLabel.CENTER);
-	private Icon iconoErrCon = ImageUtil.loadIcon("ar/pegasus/framework/imagenes/error_conectividad.gif");
+	private Icon iconoErrCon = ImageUtil.loadIcon(RutaElementos.ERROR_CONNECT);
 	private JLabel lblIconoErrCon = new JLabel(iconoErrCon, JLabel.CENTER);
-	private Icon iconoErrApp = ImageUtil.loadIcon("ar/pegasus/framework/imagenes/error_aplicacion.gif");
+	private Icon iconoErrApp = ImageUtil.loadIcon(RutaElementos.ERROR_APPLICATION);
 	private JLabel lblIconoErrApp = new JLabel(iconoErrApp, JLabel.CENTER);
 
 	/**

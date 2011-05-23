@@ -24,7 +24,6 @@ public class BossError {
 
 	static {
 		try {
-			//if (true) throw new PRuntimeException("df");
 			notificadorErrores = NotificadorErroresEmailWS.getInstance();
 		} catch(Throwable e) {
 			notificadorErrores = NotificadorErroresConsola.getInstance();
@@ -97,10 +96,10 @@ public class BossError {
 		e.setIdAplicacion(idAplicacion);
 		String batchMode = System.getProperty("batch_mode");
 		if(batchMode != null && batchMode.equalsIgnoreCase("S")) {
-			throw new RuntimeException(BossIdiomas.getInstance("fwjava").getString("notificar_error_como_runtime_exception", new Object[] {e.getMensajeContexto(), e.getMensajeError()}), e); 
+			throw new RuntimeException(BossIdiomas.getInstance("fw").getString("notificar_error_como_runtime_exception", new Object[] {e.getMensajeContexto(), e.getMensajeError()}), e); 
 		}
-		if(e.getTipoError() != ERR_OPERACION)
-//			notificadorErrores.notificarError(e);
+//		if(e.getTipoError() != ERR_OPERACION)
+////		notificadorErrores.notificarError(e);
 		if(e.getCause() == null) {
 			new PErrorDialog(e.getTipoError(), e.getMensajeContexto(), e.getMensajeError(), e.getLlamadaParametrizada(), e, e.getTips()).setVisible(true);
 		} else {

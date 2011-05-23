@@ -21,6 +21,10 @@ public class RutaElementos {
 	public static final String DEFAULT_ICONO_CALENDARIO_DESHAB = "ar/pegasus/framework/imagenes/b_calendario_des.png";
 	public static final String DEFAULT_ICON_BTN_FORWARD = "ar/pegasus/framework/imagenes/b_cal_der.png";
 	public static final String DEFAULT_ICON_BTN_BACK = "ar/pegasus/framework/imagenes/b_cal_izq.png";
+	// Imagenes de error
+	public static final String ERROR_IMG = "ar/pegasus/framework/imagenes/Error.gif";
+	public static final String ERROR_CONNECT = "ar/pegasus/framework/imagenes/error_conectividad.gif";
+	public static final String ERROR_APPLICATION = "ar/pegasus/framework/imagenes/error_aplicacion.gif";
 	
 	public static String RUTA_IMAGEN_NO_DISPONIBLE = "ar/pegasus/veterinaria/imagenes/no_disponible.jpg";
 

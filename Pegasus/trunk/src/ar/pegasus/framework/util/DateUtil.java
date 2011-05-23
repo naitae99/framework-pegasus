@@ -11,6 +11,7 @@ import java.util.GregorianCalendar;
 import java.util.TimeZone;
 /**
  * Clase que contiene funciones útiles de Fecha.
+ * 
  * @author oarias
  */
 public class DateUtil {
@@ -39,6 +40,7 @@ public class DateUtil {
 	public static final int PRECISION_AÑOS = 3;
 	public static final int PRECISION_MESES = 2;
 	public static final int PRECISION_DIAS = 1;
+	public static final String SHORT_DATE_ENGLISH = "MM/dd/yyyy";
 
     /**
      * Convierte un String a <b>java.sql.Date</b>.
