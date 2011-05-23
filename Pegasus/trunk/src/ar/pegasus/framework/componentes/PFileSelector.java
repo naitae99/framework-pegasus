@@ -63,10 +63,10 @@ public class PFileSelector {
 
 	/**
 	 * Retorna una instacia de JFileChooser.
-	 * @param mode El modo de selecci�n. Posibles modos:
-	 *             FILES_ONLY Solo selecci�n de archivos.
-	 *             DIRECTORIES_ONLY Solo selecci�n de directorios.
-	 *             FILES_AND_DIRECTORIES Selecci�n de archivos y directorios.
+	 * @param mode El modo de selección. Posibles modos:
+	 *             FILES_ONLY Solo selección de archivos.
+	 *             DIRECTORIES_ONLY Solo selección de directorios.
+	 *             FILES_AND_DIRECTORIES Selección de archivos y directorios.
 	 * @param fileFilter El filtro de archivos a utilizar (Ej) para seleccionar solo archivos .zip)
 	 * @param multiSelectionEnabled Flag para indicar si se puede seleccionar mas de un archivo o/y directorio.
 	 * @return fileChooser La instancia del componente.
@@ -154,15 +154,15 @@ public class PFileSelector {
 	}
 
 	/**
-	 * Abre un di�logo de selecci�n de archivos acorde a la parametrizaci�n.
-	 * @param saveOrOpen Indica si el di�logo de decir Guardar o Abrir.
-	 * @param fileSelectionMode El modo de selecci�n. Posibles modos:
-	 *             FILES_ONLY Solo selecci�n de archivos.
-	 *             DIRECTORIES_ONLY Solo selecci�n de directorios.
-	 *             FILES_AND_DIRECTORIES Selecci�n de archivos y directorios.
+	 * Abre un diálogo de selección de archivos acorde a la parametrización.
+	 * @param saveOrOpen Indica si el diálogo de decir Guardar o Abrir.
+	 * @param fileSelectionMode El modo de selección. Posibles modos:
+	 *             FILES_ONLY Solo selección de archivos.
+	 *             DIRECTORIES_ONLY Solo selección de directorios.
+	 *             FILES_AND_DIRECTORIES selección de archivos y directorios.
 	 * @param fileFilter El filtro de archivos a utilizar (Ej) para seleccionar solo archivos .zip)
-	 * @param parent Permite indicar el componente padre del di�logo.
-	 * @return File El archivo seleccionado o null si se cancel� la selecci�n.
+	 * @param parent Permite indicar el componente padre del diálogo.
+	 * @return File El archivo seleccionado o null si se canceló la selección.
 	 */
 	public static File obtenerArchivo(int saveOrOpen, int fileSelectionMode, FileFilter filter, Component parent) {
 		File selectedFile = null;

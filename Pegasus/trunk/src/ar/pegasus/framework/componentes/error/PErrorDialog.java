@@ -29,10 +29,10 @@ import ar.pegasus.framework.util.ImageUtil;
 
 
 /**
- * Componente que muestra un cuadro de diálogo con un mensaje de error y tres botones:
- * el primero para ver los detalles del error (el stack trace de la excepción),
+ * Componente que muestra un cuadro de diï¿½logo con un mensaje de error y tres botones:
+ * el primero para ver los detalles del error (el stack trace de la excepciï¿½n),
  * el segundo para ver los tips o sugerencias en cuanto al error, y el tercero para
- * cerrar el cuadro de diálogo.
+ * cerrar el cuadro de diï¿½logo.
  * @author oarias
  */
 public class PErrorDialog extends JDialog {
@@ -68,11 +68,11 @@ public class PErrorDialog extends JDialog {
 	private JLabel lblIconoErrApp = new JLabel(iconoErrApp, JLabel.CENTER);
 
 	/**
-	 * Método constructor.
+	 * MÃ©todo constructor.
 	 * @param tipoDeError El tipo de error.
 	 * @param mensajeLlamador El mensaje del llamador.
 	 * @param mensajeLlamado El mensaje del llamado.
-	 * @param exception La excepción que causó el error.
+	 * @param exception La excepciÃ³n que causÃ³ el error.
 	 * @param tips Los tips o sugerencias en cuanto al error.
 	 */
 	public PErrorDialog(int tipoDeError, String mensajeLlamador, String mensajeLlamado, String llamadaParametrizada, Throwable exception, String[] tips) {
@@ -112,7 +112,7 @@ public class PErrorDialog extends JDialog {
 	}
 
 	/**
-	 * Setea el ícono de <b>Error</b>.
+	 * Setea el Ã­cono de <b>Error</b>.
 	 * @param iconoErr
 	 */
 	public void setIconoError(String iconoErr) {
@@ -120,7 +120,7 @@ public class PErrorDialog extends JDialog {
 	}
 
 	/**
-	 * Devuelve el ícono de <b>Error</b>.
+	 * Devuelve el Ã­cono de <b>Error</b>.
 	 * @return iconoErr
 	 */
 	public Icon getIconoError() {
@@ -128,7 +128,7 @@ public class PErrorDialog extends JDialog {
 	}
 
 	/**
-	 * Setea el ícono de <b>Error de Aplicación</b>.
+	 * Setea el Ã­cono de <b>Error de AplicaciÃ³n</b>.
 	 * @param iconoErrApp
 	 */
 	public void setIconoErrorAplicacion(String iconoErrApp) {
@@ -136,7 +136,7 @@ public class PErrorDialog extends JDialog {
 	}
 
 	/**
-	 * Devuelve el ícono de <b>Error de Aplicación</b>.
+	 * Devuelve el Ã­cono de <b>Error de AplicaciÃ³n</b>.
 	 * @return iconoErrApp
 	 */
 	public Icon getIconoErrorAplicacion() {
@@ -144,7 +144,7 @@ public class PErrorDialog extends JDialog {
 	}
 
 	/**
-	 * Setea el ícono de <b>Error de Conectividad</b>.
+	 * Setea el Ã­cono de <b>Error de Conectividad</b>.
 	 * @param iconoErrCon
 	 */
 	public void setIconoErrorConectividad(String iconoErrCon) {
@@ -152,7 +152,7 @@ public class PErrorDialog extends JDialog {
 	}
 
 	/**
-	 * Devuelve el ícono de <b>Error de Conectividad</b>.
+	 * Devuelve el Ã­cono de <b>Error de Conectividad</b>.
 	 * @return iconoErrCon
 	 */
 	public Icon getIconoErrorConectividad() {
@@ -243,7 +243,7 @@ public class PErrorDialog extends JDialog {
 	}
 
 	/**
-	 * Devuelve el panel que contiene los botones en el cuadro de diálogo.
+	 * Devuelve el panel que contiene los botones en el cuadro de diï¿½logo.
 	 * @return El panel que contiene los botones.
 	 */
 	public JPanel getPanBotones() {
