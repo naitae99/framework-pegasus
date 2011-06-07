@@ -92,7 +92,7 @@ import ar.pegasus.framework.util.Diccionario;
  * Componente que simplifica el uso del componente JTable de Java.
  * @author AGEA S.A.
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"unchecked","rawtypes"})
 public class PJTable extends JTable implements ListSelectionListener, PJTableEventListener, TableColumnModelListener {
 	private static final long serialVersionUID = 8127468859960616171L;
 
@@ -122,23 +122,23 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	public final static int LLENADO_HORIZONTAL = 1;
 	public final static int LLENADO_VERTICAL = 2;
 	public final static int LLENADO_NINGUNO = 3;
-	protected CLColumn[] tiposColumnas; //Vector que contiene los tipos especiales de columna asignados por el setXXXColumn
+	protected PColumn[] tiposColumnas; //Vector que contiene los tipos especiales de columna asignados por el setXXXColumn
 	private boolean tableLock; //Variable para control del lockeo total de la tabla
 	private String tableDateMask; //String que contiene la m�scara de formato de date
 	private String tableTimeMask; //String que contiene la m�scara de formato de time
 	protected Color alternativeColor; //Objeto color. Si est� definido marca el color de fondo de las filas salteadas
 	private Color headerBackground = HEADER_BACKGROUND_DEFAULT_COLOR; //Color de fondo de los headers
 	private Color headerForeground = HEADER_FOREGROUND_DEFAULT_COLOR; //Color de texto de los headers
-	private CLJTableRenderer tableRenderer; //Variable privada del table renderer
+	private PJTableRenderer tableRenderer; //Variable privada del table renderer
 	private DefaultTableModel tableModel; //Variable privada del modelo
-	protected Hashtable<String, CLCell> lockCells; //Colecci�n que contiene las celdas lockeadas
-	protected Hashtable<String, CLCell> backgroundColorCells; //Colecci�n que contiene las celdas con un color de fondo
-	protected Hashtable<String, CLCell> foregroundColorCells; //Colecci�n que contiene las celdas con un color de fuente
-	protected Hashtable<Integer, CLRow> backgroundColorRows; //Colecci�n que contiene las filas con un color de fondo
-	protected Hashtable<String, CLCell> fontCells; //Colecci�n que contiene las celdas con una fuente
-	protected Hashtable<String, CLCell> alignmentCells; //Colecci�n que contiene las celdas con una alineaci�n
-	protected Hashtable<String, CLCell> tooltipCells; //Colecci�n que contiene las celdas con un tootltip
-	protected Hashtable<String, CLCell> typesCells; //Colecci�n que contiene las celdas con un tipo
+	protected Hashtable<String, PCell> lockCells; //Colección que contiene las celdas lockeadas
+	protected Hashtable<String, PCell> backgroundColorCells; //Colección que contiene las celdas con un color de fondo
+	protected Hashtable<String, PCell> foregroundColorCells; //Colección que contiene las celdas con un color de fuente
+	protected Hashtable<Integer, PRow> backgroundColorRows; //Colección que contiene las filas con un color de fondo
+	protected Hashtable<String, PCell> fontCells; //Colección que contiene las celdas con una fuente
+	protected Hashtable<String, PCell> alignmentCells; //Colección que contiene las celdas con una alineación
+	protected Hashtable<String, PCell> tooltipCells; //Colección que contiene las celdas con un tootltip
+	protected Hashtable<String, PCell> typesCells; //Colección que contiene las celdas con un tipo
 	private ColumnHeaderTooltips columnHeaderToolTips; //Objeto que contiene los tooltips de los headers
 	private int sepDateMask1, sepDateMask2, sepTimeMask1, sepTimeMask2; //Variables auxiliares para el control de la edici�n de un date y un time
 	private int llenado = LLENADO_NINGUNO;
@@ -155,7 +155,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	private List gruposHeaders; //Colecci�n que contiene los grupos de headers
 	private int colClave; //Variable que indice en columna se encuentran las claves
 	private List<Object> clavesSeleccionadas; //Variable que contiene las claves seleccionadas
-	CLColumnChooser columnChooser = new CLColumnChooser("Mostrar columnas");
+	PColumnChooser columnChooser = new PColumnChooser("Mostrar columnas");
 	private ColumnHeaderListener columnHeaderListener;
 
 	/**
@@ -166,7 +166,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	/**
-	 * M�todo constructor.
+	 * Metodo constructor.
 	 * @param rows La cantidad de filas.
 	 * @param cols La cantidad de columnas.
 	 */
@@ -175,17 +175,17 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 //		getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "selectNextColumnCell");     
 //		getInputMap().put(KeyStroke.getKeyStroke("shift ENTER"), "selectPreviousColumnCell");
 		//Setea la tipograf�a de la tabla
-		setTableHeader(new CLJTableHeader(getColumnModel()));
+		setTableHeader(new PJTableHeader(getColumnModel()));
 		setFont(getFont().deriveFont((float)fontSize));
 		getTableHeader().setFont(getTableHeader().getFont().deriveFont((float)fontSize));
 		setRowHeight(ROW_DEFAULT_HEIGHT);
-		tableRenderer = new CLJTableRenderer();
+		tableRenderer = new PJTableRenderer();
 		setDateMask(DateUtil.SHORT_DATE);
 		setTimeMask(DateUtil.SHORT_HOUR_TIME);
-		tiposColumnas = new CLColumn[cols];
-		tableModel = new CLJTableModel(rows, cols);
+		tiposColumnas = new PColumn[cols];
+		tableModel = new PJTableModel(rows, cols);
 		setModel(tableModel);
-		tableModel.addTableModelListener(new CLJTableModelListener());
+		tableModel.addTableModelListener(new PJTableModelListener());
 		setDefaultRenderer(Object.class, tableRenderer);
 		setDefaultRenderer(Integer.class, tableRenderer);
 		addFocusListener(new FocusTable());
@@ -205,8 +205,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		gruposHeaders = new ArrayList();
 		clavesSeleccionadas = new ArrayList();
 		setReorderingAllowed(true);
-		setUI(new CLJTableUI());
-		getTableHeader().setDefaultRenderer(new CLJTableHeaderRenderer());
+		setUI(new PJTableUI());
+		getTableHeader().setDefaultRenderer(new PJTableHeaderRenderer());
 		//KeyListener que captura los eventos y los pasa al listener del editor
 		//correspondiente a la celda que se est� editando
 		addKeyListener(new KeyListener() {
@@ -372,7 +372,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	
 	public void pintarSubimagen(Graphics g, int x, int y, int ancho, int alto){
 		g.setClip(x, y, ancho, alto);
-		((CLJTableUI)this.getUI()).pintarPagina(g);
+		((PJTableUI)this.getUI()).pintarPagina(g);
 	}
 
 	/**
@@ -488,7 +488,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		typesCells = removerFilaHash(row, typesCells);
 		Hashtable backgroundColorRowsTemp = (Hashtable)backgroundColorRows.clone();
 		for(Iterator i = backgroundColorRowsTemp.values().iterator(); i.hasNext();) {
-			CLRow fila = (CLRow)i.next();
+			PRow fila = (PRow)i.next();
 			if(fila.getIndex() == row) {
 				backgroundColorRows.remove(fila.getKey());
 			}
@@ -498,7 +498,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 				OperableTimeColumn columna = (OperableTimeColumn)tiposColumnas[i];
 				Hashtable tiposTemp = (Hashtable)columna.getTipos().clone();
 				for(Iterator j = tiposTemp.values().iterator(); j.hasNext();) {
-					CLRow fila = (CLRow)j.next();
+					PRow fila = (PRow)j.next();
 					if(fila.getIndex() == row)
 						columna.getTipos().remove(fila.getKey());
 				}
@@ -516,7 +516,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	private Hashtable removerFilaHash(int row, Hashtable hashtable) {
 		Hashtable hashtableTemp = (Hashtable)hashtable.clone();
 		for(Iterator i = hashtableTemp.values().iterator(); i.hasNext();) {
-			CLCell cell = (CLCell)i.next();
+			PCell cell = (PCell)i.next();
 			if(row == cell.getRow()) {
 				hashtable.remove(cell.getKey());
 			}
@@ -551,7 +551,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	public void addRow(Object o[], boolean selectNewRow) {
-//		if(o.length != getColumnCount()) throw new IllegalArgumentException("El array tiene dimensiones inv�lidas");
 		tableModel.addRow(o);
 		if(selectNewRow) {
 			int row = getRowCount() - 1;
@@ -574,7 +573,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * columna. Son tipos descriptivos que sirven para validar y controlar.
 	 * @return tipoColumnas
 	 */
-	public CLColumn[] getTiposColumnas() {
+	public PColumn[] getTiposColumnas() {
 		return tiposColumnas;
 	}
 
@@ -583,7 +582,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param col
 	 * @return
 	 */
-	public CLColumn getTipoColumna(int col) {
+	public PColumn getTipoColumna(int col) {
 		return tiposColumnas[col];
 	}
 
@@ -591,7 +590,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * Bloque completo de los tipos de columnas de la tabla.
 	 * @param tiposColumnas
 	 */
-	public void setTiposColumnas(CLColumn[] tiposColumnas) {
+	public void setTiposColumnas(PColumn[] tiposColumnas) {
 		this.tiposColumnas = tiposColumnas;
 	}
 
@@ -1104,22 +1103,22 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * columnas.
 	 * @param col
 	 */
-	private void actualizarTiposColumnas(CLColumn col) {
+	private void actualizarTiposColumnas(PColumn col) {
 		if(tiposColumnas != null) {
 			int cantAnterior = tiposColumnas.length;
-			CLColumn[] tiposColumnasTemp = new CLColumn[cantAnterior + 1];
+			PColumn[] tiposColumnasTemp = new PColumn[cantAnterior + 1];
 			System.arraycopy(tiposColumnas, 0, tiposColumnasTemp, 0, cantAnterior);
 			tiposColumnasTemp[cantAnterior] = col;
 			setTiposColumnas(tiposColumnasTemp);
 		} else {
-			tiposColumnas = new CLColumn[1];
+			tiposColumnas = new PColumn[1];
 			tiposColumnas[0] = col;
 		}
 	}
 
 	protected void restablecerAtributos() {
 		for(int i = 0; i < tiposColumnas.length; i++) {
-			CLColumn col = tiposColumnas[i];
+			PColumn col = tiposColumnas[i];
 			int indice = col.getIndice();
 			getColumn(indice).setHeaderValue(col.getNombre());
 			setColumnWidth(indice, col.getAncho());
@@ -1161,8 +1160,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 			setValueAt(valuesTmp[c], row2, c);
 		}
 		//intercambio el color por filas
-		CLRow clRow1 = backgroundColorRows.get(row1);
-		CLRow clRow2 = backgroundColorRows.get(row2);
+		PRow clRow1 = backgroundColorRows.get(row1);
+		PRow clRow2 = backgroundColorRows.get(row2);
 		if(clRow1 != null) {
 			clRow1.setIndex(row2);
 			backgroundColorRows.put(row2, clRow1);
@@ -1173,9 +1172,9 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		}
 	}
 
-	private void intercambiarEnHash(Hashtable<String, CLCell> hash, String key1, int row1, String key2, int row2) {
-		CLCell cell1 = hash.get(key1);
-		CLCell cell2 = hash.get(key2);
+	private void intercambiarEnHash(Hashtable<String, PCell> hash, String key1, int row1, String key2, int row2) {
+		PCell cell1 = hash.get(key1);
+		PCell cell2 = hash.get(key2);
 		if(cell1 != null) {
 			cell1.setRow(row2);
 			hash.put(cell1.getKey(), cell1);
@@ -1194,7 +1193,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param ancho
 	 * @param lock
 	 */
-	protected void setCLColumnData(int nroCol, CLColumn col, String nombre, int ancho, boolean lock) {
+	protected void setCLColumnData(int nroCol, PColumn col, String nombre, int ancho, boolean lock) {
 		col.setIndice(nroCol);
 		col.setIndiceOriginal(nroCol);
 		col.setNombre(nombre);
@@ -1361,8 +1360,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 */
     public Object getTypedValueAt(int row, int col) {
         Object value = super.getValueAt(row, col);
-        CLColumn tipoColumna = tiposColumnas[col];
-        CLCell celda = typesCells.get(row + "," + col);
+        PColumn tipoColumna = tiposColumnas[col];
+        PCell celda = typesCells.get(row + "," + col);
         if(value instanceof String) {
             if(tipoColumna instanceof DateColumn || (celda != null && celda.getType() == DATE_CELL)) {
                 if(String.valueOf(value).compareTo("") != 0) {
@@ -1437,8 +1436,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 	
 	public void setValueAtSinNotificacionEventos(Object aValue, int row, int column) {
-		if (getModel() instanceof CLJTableModel){
-			CLJTableModel model = (CLJTableModel)getModel();
+		if (getModel() instanceof PJTableModel){
+			PJTableModel model = (PJTableModel)getModel();
 			model.setValueAtSinNotificaciones(aValue,row,column);	
 		}else {
 			throw new UnsupportedOperationException("La operaci�n no es soportada por el modelo de tabla subyacente");
@@ -1456,7 +1455,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param col
 	 */
 	public void lockCell(int row, int col) {
-		CLCell cellLock = new CLCell(row, col);
+		PCell cellLock = new PCell(row, col);
 		if(lockCells.get(cellLock.getKey()) == null) {
 			lockCells.put(cellLock.getKey(), cellLock);
 		}
@@ -1473,7 +1472,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param color
 	 */
 	public void lockCell(int row, int col, Color color) {
-		CLCell cellLock = new CLCell(row, col);
+		PCell cellLock = new PCell(row, col);
 		setBackgroundCell(row, col, color);
 		if(lockCells.get(cellLock.getKey()) == null) {
 			lockCells.put(cellLock.getKey(), cellLock);
@@ -1505,7 +1504,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param color
 	 */
 	public void setBackgroundCell(int row, int col, Color color) {
-		CLCell cell = new CLCell(row, col);
+		PCell cell = new PCell(row, col);
 		cell.setBackgroundColor(color);
 		if(backgroundColorCells.get(cell.getKey()) != null)
 			backgroundColorCells.remove(cell.getKey());
@@ -1519,7 +1518,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param color
 	 */
 	public void setForegroundCell(int row, int col, Color color) {
-		CLCell cell = new CLCell(row, col);
+		PCell cell = new PCell(row, col);
 		cell.setForegroundColor(color);
 		if(foregroundColorCells.get(cell.getKey()) != null)
 			foregroundColorCells.remove(cell.getKey());
@@ -1544,7 +1543,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param fuente
 	 */
 	public void setFontCell(int row, int col, Font fuente) {
-		CLCell cell = new CLCell(row, col);
+		PCell cell = new PCell(row, col);
 		cell.setFuente(fuente);
 		if(fontCells.get(cell.getKey()) != null)
 			fontCells.remove(cell.getKey());
@@ -1569,7 +1568,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param alignment
 	 */
 	public void setAlignmentCell(int row, int col, int alignment) {
-		CLCell cell = new CLCell(row, col);
+		PCell cell = new PCell(row, col);
 		cell.setAlignment(alignment);
 		if(alignmentCells.get(cell.getKey()) != null)
 			alignmentCells.remove(cell.getKey());
@@ -1583,7 +1582,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param tooltip
 	 */
 	public void setTooltipCell(int row, int col, String tooltip) {
-		CLCell cell = new CLCell(row, col);
+		PCell cell = new PCell(row, col);
 		cell.setTooltip(tooltip);
 		if(tooltipCells.get(cell.getKey()) != null)
 			tooltipCells.remove(cell.getKey());
@@ -1610,7 +1609,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param format
 	 */
 	public void setTypeCell(int row, int col, int type, String format) {
-		CLCell cell = new CLCell(row, col);
+		PCell cell = new PCell(row, col);
 		cell.setType(type);
 		cell.setMask(format);
 		if(typesCells.get(cell.getKey()) != null)
@@ -1626,7 +1625,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 */
 	public Color getBackgroundCell(int row, int column) {
 		String key = row + "," + column;
-		CLCell cell = (CLCell)backgroundColorCells.get(key);
+		PCell cell = (PCell)backgroundColorCells.get(key);
 		if(cell != null)
 			return cell.getBackgroundColor();
 		return null;
@@ -1638,7 +1637,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param color
 	 */
 	public void setBackgroundRow(int index, Color color) {
-		CLRow fila = new CLRow(index);
+		PRow fila = new PRow(index);
 		fila.setBackgroundColor(color);
 		if(backgroundColorRows.get(fila.getKey()) != null)
 			backgroundColorRows.remove(fila.getKey());
@@ -1653,7 +1652,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 */
 	public Color getForegroundCell(int row, int col) {
 		String key = row + "," + col;
-		CLCell cell = (CLCell)foregroundColorCells.get(key);
+		PCell cell = (PCell)foregroundColorCells.get(key);
 		if(cell != null)
 			return cell.getForegroundColor();
 		return getForeground();
@@ -1666,7 +1665,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 */
 	public Color getBackgroundRow(int index) {
 		Integer key = new Integer(index);
-		CLRow row = (CLRow)backgroundColorRows.get(key);
+		PRow row = (PRow)backgroundColorRows.get(key);
 		if(row != null)
 			return row.getBackgroundColor();
 		return null;
@@ -1692,7 +1691,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 */
 	public Font getFontCell(int row, int column) {
 		String key = row + "," + column;
-		CLCell cell = (CLCell)fontCells.get(key);
+		PCell cell = (PCell)fontCells.get(key);
 		if(cell != null)
 			return cell.getFuente();
 		return getFont();
@@ -1706,7 +1705,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 */
 	public int getAlignmentCell(int row, int col) {
 		String key = row + "," + col;
-		CLCell cell = (CLCell)alignmentCells.get(key);
+		PCell cell = (PCell)alignmentCells.get(key);
 		if(cell != null)
 			return cell.getAlignment();
 		if(tiposColumnas[col].isTextLeftAlign())
@@ -1725,7 +1724,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 */
 	public String getTooltipCell(int row, int column) {
 		String key = row + "," + column;
-		CLCell cell = (CLCell)tooltipCells.get(key);
+		PCell cell = (PCell)tooltipCells.get(key);
 		if(cell != null)
 			return cell.getTooltip();
 		return null;
@@ -1739,7 +1738,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 */
 	public int getTypeCell(int row, int column) {
 		String key = row + "," + column;
-		CLCell cell = (CLCell)typesCells.get(key);
+		PCell cell = (PCell)typesCells.get(key);
 		if(cell != null)
 			return cell.getType();
 		return -1;
@@ -1823,14 +1822,14 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		}
 	}
 
-	public class CLJTableModel extends DefaultTableModel {
+	public class PJTableModel extends DefaultTableModel {
 		private static final long serialVersionUID = 8289251711420045132L;
 
-		public CLJTableModel() {
+		public PJTableModel() {
 			super();
 		}
 
-		public CLJTableModel(int rowCount, int columnCount) {
+		public PJTableModel(int rowCount, int columnCount) {
 			//Se inicializan los vectores vac�os y con el tama�o especificado
 			super(new Object[rowCount][columnCount], new Object[columnCount]);
 		}
@@ -1845,7 +1844,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		 * @param row
 		 * @param col
 		 */
-		@SuppressWarnings("unchecked")
 		public void setValueAt(Object value, int row, int col) {
 			if(row >= 0 && row < ((Vector)dataVector).size()) {
 				Vector<Object> rowVector = (Vector)dataVector.elementAt(row);
@@ -1920,7 +1918,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @return
 	 */
 	private boolean validarValorColumna(Object value, int col) {
-		CLColumn c;
+		PColumn c;
 		StringColumn sc;
 		if(tiposColumnas[col] == null) {
 			sc = new StringColumn();
@@ -1977,6 +1975,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 
 	/** Clase MultilineStringEditor */
 	protected class MultilineStringEditor extends AbstractCellEditor implements TableCellEditor {
+		private static final long serialVersionUID = -7398005304475467344L;
+
 		JTextArea textArea;
 
 		public MultilineStringEditor() {
@@ -1995,6 +1995,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 
 	/** Clase IntegerEditor */
 	protected class IntegerEditor extends KeyEditor {
+		private static final long serialVersionUID = 5339988830209744497L;
+
 		protected PJFormattedTextField ftf;
 		NumberListener numberListener;
 		boolean nulleable = false;
@@ -2038,6 +2040,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 
 	/** Clase IntegerEditor Float*/
 	private class FloatEditor extends KeyEditor {
+		private static final long serialVersionUID = 8209123206442854507L;
+
 		PJFormattedTextField ftf;
 		FloatListener numberListener;
 
@@ -2084,6 +2088,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 			dateListener = new DateListener(ftf);
 			ftf.addKeyListener(dateListener);
 			delegate = new EditorDelegate() {
+				private static final long serialVersionUID = -7044794922023987234L;
+
 				public void setValue(Object valor) {
 					if(valor instanceof Date) {
 						Date fecha = (Date)valor;
@@ -2142,6 +2148,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 
 	/** Clase TimeEditor */
 	private class TimeEditor extends KeyEditor {
+		private static final long serialVersionUID = -4682796662910067784L;
+
 		PJFormattedTextField ftf;
 		TimeListener timeListener;
 
@@ -2385,7 +2393,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	/** Clase utilizada para almacenar una celda */
-	private class CLCell {
+	private class PCell {
 		private int row;
 		private int column;
 		private Font fuente;
@@ -2396,7 +2404,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		private int type;
 		private String mask;
 
-		public CLCell(int row, int column) {
+		public PCell(int row, int column) {
 			this.row = row;
 			this.column = column;
 		}
@@ -2413,9 +2421,9 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 			this.row = row;
 		}
 
-		public void setColumn(int column) {
-			this.column = column;
-		}
+//		public void setColumn(int column) {
+//			this.column = column;
+//		}
 
 		public String getKey() {
 			return row + "," + column;
@@ -2479,12 +2487,12 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	/** Clase utilizada para almacenar una fila */
-	private class CLRow {
+	private class PRow {
 		private int index;
 		private Color backgroundColor;
 		private boolean time;
 
-		public CLRow(int index) {
+		public PRow(int index) {
 			this.index = index;
 		}
 
@@ -2518,6 +2526,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	private class ComboBoxEditor extends DefaultCellEditor {
+		private static final long serialVersionUID = 1345366191728641782L;
+
 		public ComboBoxEditor(JComboBox combo) {
             super(combo);
             combo.addKeyListener(new KeyAdapter() {
@@ -2544,6 +2554,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 
 	/** Clase editor que se habilita al presionar una tecla */
 	private abstract class KeyEditor extends DefaultCellEditor {
+		private static final long serialVersionUID = -4228423384846610040L;
+
 		int row;
 		int col;
 
@@ -2736,8 +2748,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		}
 	}
 
-	/** Clase CLColumn */
-	public abstract class CLColumn {
+	/** Clase PColumn */
+	public abstract class PColumn {
 		
 		private int indice;
 		private int indiceOriginal;
@@ -2943,7 +2955,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	/** Clase StringColumn */
-	public final class StringColumn extends CLColumn {
+	public final class StringColumn extends PColumn {
 		private int size;
 		private String filtro;
 
@@ -2973,7 +2985,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	/** Clase MultilineColumn */
-	public final class MultilineColumn extends CLColumn {
+	public final class MultilineColumn extends PColumn {
 		private int size;
 		private String filtro;
 		private MultiLineCellRenderer multiLineCellRenderer;
@@ -3008,7 +3020,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	/** Clase ComboColumn */
-	public final class ComboColumn extends CLColumn {
+	public final class ComboColumn extends PColumn {
 		private JComboBox combo;
 
 		public JComboBox getCombo() {
@@ -3025,7 +3037,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	/** Clase CheckColumn */
-	public final class CheckColumn extends CLColumn {
+	public final class CheckColumn extends PColumn {
 		private JCheckBox check;
 
 		public JCheckBox getCheck() {
@@ -3042,7 +3054,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	/** Clase IntColumn */
-	public final class IntColumn extends CLColumn {
+	public final class IntColumn extends PColumn {
 		private int minValue;
 		private int maxValue;
 		private String mask;
@@ -3077,7 +3089,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	/** Clase DateColumn */
-	public final class DateColumn extends CLColumn {
+	public final class DateColumn extends PColumn {
 		private Date minDate;
 		private Date maxDate;
 		private String mask;
@@ -3112,7 +3124,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	/** Clase TimeColumn */
-	public final class TimeColumn extends CLColumn {
+	public final class TimeColumn extends PColumn {
 		private String mask;
 
 		public String getMask() {
@@ -3125,7 +3137,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	/** Clase FloatColumn */
-	public final class FloatColumn extends CLColumn {
+	public final class FloatColumn extends PColumn {
 		private float minValue;
 		private float maxValue;
 		private String mask;
@@ -3160,8 +3172,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 	
 	
-	public final class OperableTimeColumn extends CLColumn {
-		private Hashtable<Integer, CLRow> tipos = new Hashtable<Integer, CLRow>();
+	public final class OperableTimeColumn extends PColumn {
+		private Hashtable<Integer, PRow> tipos = new Hashtable<Integer, PRow>();
 		private String mask;
 		private boolean difFechas;
 
@@ -3170,14 +3182,14 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		}
 
 		public void addRow(int row, boolean time) {
-			CLRow clRow = new CLRow(row);
+			PRow clRow = new PRow(row);
 			clRow.setTime(time);
 			tipos.put(clRow.getKey(), clRow);
 		}
 
 		public boolean isTime(int row) {
 			for(Iterator i = tipos.values().iterator(); i.hasNext();) {
-				CLRow clRow = (CLRow)i.next();
+				PRow clRow = (PRow)i.next();
 				if(clRow.getIndex() == row)
 					return clRow.isTime();
 			}
@@ -3227,13 +3239,13 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 			return tipos;
 		}
 
-		public void setTipos(Hashtable<Integer, CLRow> tipos) {
+		public void setTipos(Hashtable<Integer, PRow> tipos) {
 			this.tipos = tipos;
 		}
 	}
 
 	/** Clase ImageColumn */
-	public final class ImageColumn extends CLColumn {
+	public final class ImageColumn extends PColumn {
 		private JLabel imagen;
 
 		public JLabel getImagen() {
@@ -3250,7 +3262,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	/** Renderer de la tabla */
-	protected class CLJTableRenderer extends DefaultTableCellRenderer {
+	protected class PJTableRenderer extends DefaultTableCellRenderer {
 		private static final long serialVersionUID = 5191731477370115026L;
 
 		//Para mostrar las filas alteradas de distinto color. No funciona en modo edici�n
@@ -3297,7 +3309,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 			}
 			setForeground(getForegroundCell(row, col));
 			if(value != null) {
-				CLCell cell = (CLCell)typesCells.get(row + "," + col);
+				PCell cell = (PCell)typesCells.get(row + "," + col);
 				if(cell != null) {
 					int type = cell.getType();
 					if(type == INT_CELL) {
@@ -3342,7 +3354,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 					} else
 						setValue(value);
 				} else {
-					CLColumn tipoColumna = tiposColumnas[col];
+					PColumn tipoColumna = tiposColumnas[col];
 					if(tipoColumna instanceof IntColumn) {
 						String mask = ((IntColumn)tipoColumna).getMask();
 						if(mask != null) {
@@ -3532,8 +3544,10 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 
 	}
 
-	/** Renderer de las celdas de tipo 'Im�gen' */
+	/** Renderer de las celdas de tipo 'Imagen' */
 	private class ImageCellRenderer extends JLabel implements TableCellRenderer {
+		private static final long serialVersionUID = -8267856543916456134L;
+
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 			Component component = (Component)value;
 			Color cellColor = getBackgroundCell(row, column);
@@ -3567,6 +3581,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	
 	/** Renderer de las celdas de tipo 'Check' */
 	public class CheckRenderer extends DefaultTableCellRenderer {
+		private static final long serialVersionUID = 4671847551326528388L;
+
 		private JCheckBox check = new JCheckBox();
 
 		public CheckRenderer() {
@@ -3599,6 +3615,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 
 	/** Renderer de las celdas de tipo 'Multiline' */
 	public class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {
+		private static final long serialVersionUID = 9209227583854812916L;
+
 		private final DefaultTableCellRenderer adaptee = new DefaultTableCellRenderer();
 		public MultiLineCellRenderer() {
 			setLineWrap(true);
@@ -3645,6 +3663,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 
 	/** Renderer de las celdas de tipo 'Multiline' con el flag isHtml en true */
 	public class HtmlCellRenderer extends JLabel implements TableCellRenderer {
+		private static final long serialVersionUID = -3069462002088673080L;
+
 		public HtmlCellRenderer() {
 			setOpaque(true);
 		}
@@ -3702,11 +3722,11 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	public void sincronizarModeloVista() {
-		CLColumn[] tiposColumnasTemp = new CLColumn[getTiposColumnas().length];
+		PColumn[] tiposColumnasTemp = new PColumn[getTiposColumnas().length];
 		System.arraycopy(getTiposColumnas(), 0, tiposColumnasTemp, 0, getTiposColumnas().length);
 		for(int i = 0; i < getColumnCount(); i++) {
 			if(getColumnModel().getColumn(i).getModelIndex() != i) {
-				CLColumn col = getTipoColumna(getColumnModel().getColumn(i).getModelIndex());
+				PColumn col = getTipoColumna(getColumnModel().getColumn(i).getModelIndex());
 				col.setIndice(i);
 				tiposColumnasTemp[i] = col;
 				getColumnModel().getColumn(i).setModelIndex(i);
@@ -3724,7 +3744,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		columnChooser.setVisible(true);
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unused")
 	public void sortAllRowsBy(int col, boolean ascending, Comparator comparator) {
 		int filas = this.getRowCount(); //Cantidad de filas de la tabla
 		int columnas = this.getColumnCount(); //Cantidad de columnas de la
@@ -3764,7 +3784,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		fontCells = ordenarHash(data, fontCells);
 		alignmentCells = ordenarHash(data, alignmentCells);
 		for(Iterator i = backgroundColorRows.values().iterator(); i.hasNext();) {
-			CLRow fila = (CLRow)i.next();
+			PRow fila = (PRow)i.next();
 			int indexFila = fila.getIndex();
 			for(int j = 0; j < filas; j++) {
 				int indexData = ((Integer)((Vector)data.elementAt(j)).elementAt(columnas)).intValue();
@@ -3777,11 +3797,11 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 			}
 		}
 		for(int i = 0; i < tiposColumnas.length; i++) {
-			CLColumn tipoColumna = tiposColumnas[i];
+			PColumn tipoColumna = tiposColumnas[i];
 			if(tipoColumna instanceof OperableTimeColumn) {
 				Hashtable tipos = ((OperableTimeColumn)tipoColumna).getTipos();
 				for(Iterator j = tipos.values().iterator(); j.hasNext();) {
-					CLRow fila = (CLRow)j.next();
+					PRow fila = (PRow)j.next();
 					for(int k = 0; k < filas; k++) {
 //						int indexData = ((Integer)((Vector)data.elementAt(k)).elementAt(columnas)).intValue();
 						fila.setIndex(k);
@@ -3821,18 +3841,16 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param col
 	 * @param ascending
 	 */
-	@SuppressWarnings("unchecked")
 	public void sortAllRowsBy(int col, boolean ascending) {
 		sortAllRowsBy(col, ascending, new ColumnSorter(col, ascending));
 	}
 
-	@SuppressWarnings("unchecked")
 	private Hashtable ordenarHash(Vector data, Hashtable hashtable) {
 		int filas = getRowCount();
 		int columnas = getColumnCount();
 		Hashtable hashOrdenado = new Hashtable();
 		for(Iterator i = hashtable.values().iterator(); i.hasNext();) {
-			CLCell cell = (CLCell)i.next();
+			PCell cell = (PCell)i.next();
 			int filaCelda = cell.getRow();
 			for(int j = 0; j < filas; j++) {
 				int filaData = ((Integer)((Vector)data.elementAt(j)).elementAt(columnas)).intValue();
@@ -3857,7 +3875,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 			this.ascending = ascending;
 		}
 
-		@SuppressWarnings("unchecked")
 		public int compare(Object a, Object b) {
 			Vector v1 = (Vector)a;
 			Vector v2 = (Vector)b;
@@ -3894,8 +3911,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		}
 	}
 	
-	/** Clase para manejar la edici�n de las columnas */
-	public class CLJTableModelListener implements TableModelListener {
+	/** Clase para manejar la edicion de las columnas */
+	public class PJTableModelListener implements TableModelListener {
 		public void tableChanged(TableModelEvent evt) {
 			int firstRow = evt.getFirstRow();
 			int lastRow = evt.getLastRow();
@@ -3980,7 +3997,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		sortAllRowsBy(lastSortedColIndex, sortColsAscending);
 	}
 
-	public class CLColumnChooser extends JDialog implements ActionListener {
+	public class PColumnChooser extends JDialog implements ActionListener {
 		private static final long serialVersionUID = -1448122997158638606L;
 
 		private JButton btnAceptar = new JButton("Aceptar");
@@ -3989,7 +4006,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		private JScrollPane sp = new JScrollPane(listaHeader);
 		private boolean okPressed;
 
-		public CLColumnChooser(String titulo) {
+		public PColumnChooser(String titulo) {
 			super(new JDialog(), titulo, true);
 			setResizable(false);
 			construct();
@@ -4002,7 +4019,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 			String columnas[] = obtenerColumnas();
 			listaHeader.setValues(columnas);
 			for(int i = 0; i < columnas.length; i++) {
-				CLColumn clColumn = getCLColumn(columnas[i]);
+				PColumn clColumn = getCLColumn(columnas[i]);
 				if(!clColumn.isOculta() && clColumn.isVisible()) {
 					listaHeader.setSelectedIndex(i);
 				}
@@ -4011,9 +4028,9 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 			pack();
 		}
 
-		private CLColumn getCLColumn(String header) {
+		private PColumn getCLColumn(String header) {
 			for(int i = 0; i < tiposColumnas.length; i++) {
-				CLColumn clColumn = tiposColumnas[i];
+				PColumn clColumn = tiposColumnas[i];
 				if(clColumn.getNombre().compareTo(header) == 0) {
 					return clColumn;
 				}
@@ -4029,14 +4046,14 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 				int cantidadColumnasOcultas = 0;
 				int j = 0;
 				for(int i = 0; i < tiposColumnas.length; i++) {
-					if(((CLColumn)tiposColumnas[i]).isOculta()) {
+					if(((PColumn)tiposColumnas[i]).isOculta()) {
 						cantidadColumnasOcultas++;
 						continue;
 					}
 					if(!listaHeader.isSelectedIndex(j))
-						((CLColumn)tiposColumnas[j + cantidadColumnasOcultas]).setVisible(false);
+						((PColumn)tiposColumnas[j + cantidadColumnasOcultas]).setVisible(false);
 					else
-						((CLColumn)tiposColumnas[j + cantidadColumnasOcultas]).setVisible(true);
+						((PColumn)tiposColumnas[j + cantidadColumnasOcultas]).setVisible(true);
 					j++;
 				}
 				okPressed = true;
@@ -4064,11 +4081,10 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		 * Obtiene los nombres del header de la tabla y devuelve un String[] con
 		 * los datos.
 		 */
-		@SuppressWarnings("unchecked")
 		public String[] obtenerColumnas() {
 			java.util.List headers = new ArrayList();
 			for(int i = 0; i < getColumnCount(); i++) {
-				CLColumn columna = tiposColumnas[i];
+				PColumn columna = tiposColumnas[i];
 				String header = columna.getNombre();
 				if(!columna.isOculta() && header != null && header.trim().length() != 0) {
 					headers.add(header);
@@ -4081,7 +4097,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		 * Devuelve la lista con los nombres de las columnas de la tabla.
 		 * @return listaHeader
 		 */
-		@SuppressWarnings("unchecked")
 		public PCheckBoxList getListaHeader() {
 			return listaHeader;
 		}
@@ -4108,8 +4123,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 			int containerWidth = scrollPane.getWidth();
 			if(containerWidth != 0) {
 				for(int i = 0; i < tiposColumnas.length; i++) {
-					if((CLColumn)tiposColumnas[i] != null) {
-						totalColWidth += ((CLColumn)tiposColumnas[i]).getAncho();
+					if((PColumn)tiposColumnas[i] != null) {
+						totalColWidth += ((PColumn)tiposColumnas[i]).getAncho();
 					}
 				}
 				//Ancho del contenedor - ancho total de las columnas - ancho del scroll
@@ -4470,7 +4485,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 */
 	public void showColumn(int index, boolean b) {
 		if(tiposColumnas[index] != null)
-			((CLColumn)tiposColumnas[index]).setVisible(b);
+			((PColumn)tiposColumnas[index]).setVisible(b);
 	}
 
 	/**
@@ -4492,7 +4507,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 */
 	public void ocultarColumna(int index, boolean b) {
 		if(tiposColumnas[index] != null)
-			((CLColumn)tiposColumnas[index]).setOculta(b);
+			((PColumn)tiposColumnas[index]).setOculta(b);
 	}
 
 	public void setColumnAlignment(int col, int alignment) {
@@ -4686,6 +4701,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 
 	/** Clase para el manejo de los distintos tipos de celdas */
 	public class PJFormattedTextField extends JFormattedTextField {
+		private static final long serialVersionUID = -1056245267047766140L;
 		private int col;
 		private int row;
 		private final PJTable tabla;
@@ -4764,7 +4780,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		HashMap tooltips = new HashMap();
 		TableColumn columnaActual;
 
-		@SuppressWarnings("unchecked")
 		public void setColumnHeaderTooltip(int col, String tooltipText) {
 			TableColumn columna = getColumnModel().getColumn(col);
 			if(tooltipText != null)
@@ -4851,8 +4866,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		int colHasta = evt.getToIndex();
 		sincronizarModeloVista();
 		if(colDesde != colHasta) {
-			CLColumn tipoColumnaDesde = tiposColumnas[colDesde];
-			CLColumn tipoColumnaHasta = tiposColumnas[colHasta];
+			PColumn tipoColumnaDesde = tiposColumnas[colDesde];
+			PColumn tipoColumnaHasta = tiposColumnas[colHasta];
 			tipoColumnaDesde.setIndice(colHasta);
 			tiposColumnas[colHasta] = tipoColumnaDesde;
 			tipoColumnaHasta.setIndice(colDesde);
@@ -4905,13 +4920,12 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	/**
 	 * Elimina la columna recbida como par�metro.
 	 */
-	@SuppressWarnings("unchecked")
 	public void removeColumn(TableColumn col) {
 		super.removeColumn(col);
-		CLColumn[] cols = new CLColumn[tiposColumnas.length - 1];
+		PColumn[] cols = new PColumn[tiposColumnas.length - 1];
 		int pos = 0;
 		for(int i = 0; i < tiposColumnas.length; i++) {
-			CLColumn c = tiposColumnas[i];
+			PColumn c = tiposColumnas[i];
 			if(c != null && c.getIndice() != col.getModelIndex()) {
 				c.setIndice(pos);
 				cols[pos] = c;
@@ -4935,7 +4949,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 
 	private Hashtable removerColumnaHash(int col, Hashtable hashtable) {
 		for(Iterator i = hashtable.values().iterator(); i.hasNext();) {
-			CLCell cell = (CLCell)i.next();
+			PCell cell = (PCell)i.next();
 			if(col == cell.getColumn())
 				hashtable.remove(cell.getKey());
 		}
@@ -4982,7 +4996,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param alto
 	 * @param ancho
 	 */
-	@SuppressWarnings("unchecked")
 	public void agruparCeldas(int fila, int col, int alto, int ancho) {
 		GrupoCeldas grupo = new GrupoCeldas(fila, col, alto, ancho);
 		gruposCeldas.add(grupo);
@@ -5002,7 +5015,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param col
 	 * @param ancho
 	 */
-	@SuppressWarnings("unchecked")
 	public void agruparHeaders(int col, int ancho) {
 		GrupoHeaders grupo = new GrupoHeaders(col, ancho);
 		gruposHeaders.add(grupo);
@@ -5361,7 +5373,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param colHasta
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public int[] agruparHastaCol(int colHasta, int cantFilas) {
 		gruposCeldas.clear();
 		setRowSelectionAllowed(false);
@@ -5438,7 +5449,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param colHasta
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	private Vector getValoresFila(int fila, int colHasta) {
 		Vector valores = new Vector();
 		for(int i = 0; i <= colHasta; i++) {
@@ -5497,7 +5507,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * celdas.
 	 * @param row
 	 */
-	@SuppressWarnings("unchecked")
 	private void actualizarHash(int row) {
 		Hashtable backgroundColorRowsTemp = new Hashtable();
 		lockCells = insertarFilaHash(row, lockCells);
@@ -5508,7 +5517,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		typesCells = insertarFilaHash(row, typesCells);
 		alignmentCells = insertarFilaHash(row, alignmentCells);
 		for(Iterator i = backgroundColorRows.values().iterator(); i.hasNext();) {
-			CLRow fila = (CLRow)i.next();
+			PRow fila = (PRow)i.next();
 			int indexFila = fila.getIndex();
 			if(indexFila >= row)
 				fila.setIndex(indexFila + 1);
@@ -5518,11 +5527,10 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		backgroundColorRows = backgroundColorRowsTemp;
 	}
 
-	@SuppressWarnings("unchecked")
 	private Hashtable insertarFilaHash(int row, Hashtable hashtable) {
 		Hashtable hashtableTemp = new Hashtable();
 		for(Iterator i = hashtable.values().iterator(); i.hasNext();) {
-			CLCell cell = (CLCell)i.next();
+			PCell cell = (PCell)i.next();
 			int filaCelda = cell.getRow();
 			if(filaCelda >= row)
 				cell.setRow(filaCelda + 1);
@@ -5605,9 +5613,9 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	/**
 	 * UI adaptada para la agrupaci�n de celdas.
 	 */
-	public class CLJTableUI extends BasicTableUI {
+	public class PJTableUI extends BasicTableUI {
 		/**
-		 * M�todo copiado de BasicTableUI.
+		 * Metodo copiado de BasicTableUI.
 		 * @param g
 		 * @param c
 		 */
@@ -5986,7 +5994,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	/**
 	 * Renderer de los headers.
 	 */
-	public class CLJTableHeaderRenderer extends JLabel implements TableCellRenderer {
+	public class PJTableHeaderRenderer extends JLabel implements TableCellRenderer {
+		private static final long serialVersionUID = 6653758043903221868L;
 
 		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int rowIndex, int vColIndex) {
 			JLabel header = (JLabel)this;
@@ -6013,7 +6022,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param colData
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public Vector getDataPieChart(int filaDesde, int filaHasta, int colCategoria, int colData) {
 		Vector categorias = new Vector();
 		Vector categoriasTemp = new Vector();
@@ -6057,7 +6065,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 * @param colData
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public Vector getDataBarChart(int filaDesde, int filaHasta, int colCategorias, int colSeries, int colData) {
 		Vector dataCategorias = new Vector();
 		Vector dataChart = new Vector();
@@ -6121,8 +6128,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	 */
 	public String getFormattedValue(int fila, int col) {
 		Object value = getValueAt(fila, col);
-		CLColumn tipoColumna = tiposColumnas[col];
-		CLCell celda = (CLCell)typesCells.get(fila + "," + col);
+		PColumn tipoColumna = tiposColumnas[col];
+		PCell celda = (PCell)typesCells.get(fila + "," + col);
 		if(value != null) {
 			if(tipoColumna instanceof IntColumn || (celda != null && celda.getType() == INT_CELL)) {
 				String mask;
@@ -6240,7 +6247,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		TableColumnModel columnModel = getColumnModel();
 		for(int i = colInicio; i <= colFin; i++)
 			grupoColumnas.add(columnModel.getColumn(i));
-		((CLJTableHeader)getTableHeader()).agregarGrupoColumnas(grupoColumnas);
+		((PJTableHeader)getTableHeader()).agregarGrupoColumnas(grupoColumnas);
 	}
 
 	/**
@@ -6259,7 +6266,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		if(this.permiteHeaderMultiple != permiteHeaderMultiple) {
 			this.permiteHeaderMultiple = permiteHeaderMultiple;
 			if(!permiteHeaderMultiple)
-				((CLJTableHeader)getTableHeader()).cleanColumnGroups();			
+				((PJTableHeader)getTableHeader()).cleanColumnGroups();			
 		}
 	}
 	
@@ -6318,8 +6325,10 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		}
 	}
 
-	/** Clase para el men� emergente de la tabla */
+	/** Clase para el menu emergente de la tabla */
 	protected class PopupMenu extends JPopupMenu {
+		private static final long serialVersionUID = -28138152294174877L;
+
 		public PopupMenu() {
 			if(permiteCopiar) {
 				JMenuItem copiarTodo = new JMenuItem("Copiar todo");
@@ -6352,7 +6361,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		return indicesFilas;
 	}
 
-	@SuppressWarnings("unchecked")
 	public int[] getIndicesColumnasVisibles() {
 		List columnas = new ArrayList();
 		for(int i = 0; i < getColumnCount(); i++) {
@@ -6361,7 +6369,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		}
 		int indicesColumnas[] = new int[columnas.size()];
 		for(int i = 0; i < columnas.size(); i++)
-			indicesColumnas[i] = ((CLColumn)columnas.get(i)).getIndice();
+			indicesColumnas[i] = ((PColumn)columnas.get(i)).getIndice();
 		return indicesColumnas;
 	}
 
@@ -6434,6 +6442,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		public GrupoColumnas(TableCellRenderer renderer, String nombre) {
 			if(renderer == null) {
 				this.renderer = new DefaultTableCellRenderer() {
+					private static final long serialVersionUID = -4042772122186682842L;
+
 					public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 						JTableHeader header = table.getTableHeader();
 						if(header != null) {
@@ -6453,14 +6463,12 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 			columnas = new Vector();
 		}
 
-		@SuppressWarnings("unchecked")
 		public void add(Object obj) {
 			if(obj != null) {
 				columnas.addElement(obj);
 			}
 		}
 
-		@SuppressWarnings("unchecked")
 		public Vector getColumnGroups(TableColumn columna, Vector columnasTemp) {
 			columnasTemp.addElement(this);
 			if(columnas.contains(columna)) {
@@ -6512,15 +6520,17 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		}
 	}
 
-	/** JTableHeader adaptado para soportar headers m�ltiples */
-	public class CLJTableHeader extends JTableHeader {
+	/** JTableHeader adaptado para soportar headers múltiples */
+	public class PJTableHeader extends JTableHeader {
+		private static final long serialVersionUID = -5926422144330123461L;
+
 		@SuppressWarnings("unused")
 		private static final String uiClassID = "GroupableTableHeaderUI";
 		protected Vector gruposColumnas = null;
 
-		public CLJTableHeader(TableColumnModel model) {
+		public PJTableHeader(TableColumnModel model) {
 			super(model);
-			setUI(new CLJTableHeaderUI());
+			setUI(new PJTableHeaderUI());
 			setReorderingAllowed(false);
 		}
 
@@ -6539,7 +6549,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 			return reorderingAllowed;
 		}
 
-		@SuppressWarnings("unchecked")
 		public void agregarGrupoColumnas(GrupoColumnas grupoColumnas) {
 			setReorderingAllowed(false);
 			if(gruposColumnas == null) {
@@ -6571,12 +6580,12 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	/**
-	 * BasicTableHeaderUI desarrollada para soportar agrupaci�n de headers y
-	 * header m�ltiples.
+	 * BasicTableHeaderUI desarrollada para soportar agrupacion de headers y
+	 * header multiples.
 	 */
-	private class CLJTableHeaderUI extends BasicTableHeaderUI {
+	private class PJTableHeaderUI extends BasicTableHeaderUI {
 		/**
-		 * M�todo copiado de BasicTableHeaderUI.
+		 * Metodo copiado de BasicTableHeaderUI.
 		 * @param columnIndex
 		 * @return
 		 */
@@ -6589,9 +6598,8 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		}
 
 		/**
-		 * M�todo adaptado para soportar headers m�ltiples.
+		 * Metodo adaptado para soportar headers multiples.
 		 */
-		@SuppressWarnings("unchecked")
 		public void paint(Graphics g, JComponent c) {
 			if(((PJTable)header.getTable()).permiteHeaderMultiple) {
 				Rectangle clipBounds = g.getClipBounds();
@@ -6607,7 +6615,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 					cellRect.height = size.height;
 					cellRect.y = 0;
 					TableColumn aColumn = (TableColumn)enumeration.nextElement();
-					Enumeration cGroups = ((CLJTableHeader)header).getGruposColumnas(aColumn);
+					Enumeration cGroups = ((PJTableHeader)header).getGruposColumnas(aColumn);
 					if(cGroups != null) {
 						int groupHeight = 0;
 						while(cGroups.hasMoreElements()) {
@@ -6782,7 +6790,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 					Component comp = renderer.getTableCellRendererComponent(header.getTable(), aColumn.getHeaderValue(), false, false, -1, column);
 					int cHeight = comp.getPreferredSize().height;
 					if(((PJTable)header.getTable()).permiteHeaderMultiple) {
-						Enumeration e = ((CLJTableHeader)header).getGruposColumnas(aColumn);
+						Enumeration e = ((PJTableHeader)header).getGruposColumnas(aColumn);
 						if(e != null) {
 							while(e.hasMoreElements()) {
 								GrupoColumnas grupoColumnas = (GrupoColumnas)e.nextElement();
@@ -6829,15 +6837,15 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	public Vector getGruposColumnas() {
-		return ((CLJTableHeader)getTableHeader()).getGruposColumnas();
+		return ((PJTableHeader)getTableHeader()).getGruposColumnas();
 	}
 
-	public CLColumnChooser getColumnChooser() {
+	public PColumnChooser getColumnChooser() {
 		return columnChooser;
 	}
 
 	public String getMask(int fila, int columna) {
-		CLCell cell = (CLCell)typesCells.get(fila + "," + columna);
+		PCell cell = (PCell)typesCells.get(fila + "," + columna);
 		if(cell != null) {
 			return cell.getMask();
 		} else {
@@ -6846,7 +6854,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	}
 
 	public int getIndiceActual(int indiceOriginal) {
-		for(CLColumn columna : tiposColumnas) {
+		for(PColumn columna : tiposColumnas) {
 			if(columna.getIndiceOriginal() == indiceOriginal) {
 				return columna.getIndice();
 			}
@@ -6879,7 +6887,6 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public int[] getIndicesColumnasOcultas() {
 		List columnas = new ArrayList();
 		for(int i = 0; i < getColumnCount(); i++) {
@@ -6888,7 +6895,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		}
 		int indicesColumnas[] = new int[columnas.size()];
 		for(int i = 0; i < columnas.size(); i++)
-			indicesColumnas[i] = ((CLColumn)columnas.get(i)).getIndice();
+			indicesColumnas[i] = ((PColumn)columnas.get(i)).getIndice();
 		return indicesColumnas;
 	}
 	
