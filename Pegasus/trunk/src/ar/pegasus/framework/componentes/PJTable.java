@@ -1301,7 +1301,7 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 	//FIN DAM
 	
 	/**
-	 * Setea el <b>ancho</b> de la columna en el �ndice pasado por par�metro.
+	 * Setea el <b>ancho</b> de la columna en el índice pasado por parámetro.
 	 * @param index
 	 * @param ancho
 	 */
@@ -1315,11 +1315,11 @@ public class PJTable extends JTable implements ListSelectionListener, PJTableEve
 		
 	}
 
-	/** Manejo del evento de selecci�n de filas */
+	/** Manejo del evento de selección de filas */
 	public void newRowSelected(int newRow, int oldRow) {
 	}
 
-	/** Manejo del evento de selecci�n de una columna */
+	/** Manejo del evento de selección de una columna */
 	public void newColumnSelected(int newCol, int oldCol) {
 	}
 
