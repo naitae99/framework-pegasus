@@ -53,5 +53,9 @@
 	<classpathentry exported="true" kind="lib" path="lib/JEE/el-ri.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/JEE/seam2.2.0.GA/jboss-seam.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/xercesImpl.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/JEE/icefaces-facelets.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/JEE/icepdf-core.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/JEE/icefaces1.8.2/icefaces.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/JEE/icefaces1.8.2/icefaces-comps.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
