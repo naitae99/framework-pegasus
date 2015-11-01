@@ -1,0 +1,1 @@
+Este es un proyecto de generación de un framework de trabajo para el desarrollo de aplicaciones swing usando ejb3.
